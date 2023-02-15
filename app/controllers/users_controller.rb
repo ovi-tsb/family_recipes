@@ -5,13 +5,36 @@ class UsersController < ApplicationController
   def index
   	# @users = User.all
     @users = User.search(params[:search])
+
+
+
+
+    
+
   end
 
 
   def show
-  	@user = User.all
+  	# @user = User.all
     
     @users = User.search(params[:search])
+    @invitation = Invitation.all
+
+    @recipe = Recipe.all
+    
+    # @user.recipes.each do
+    # recipe.user.first_name
+    # recipe.user.id
+    ids = current_user.friends.map{|f| f.id} << current_user.id
+    # ids = current_user.friends.pluck(:id) << current_user.id
+    # ids = @user.friends.ids << current_user.id
+    @recipes = Recipe.where(user_id: ids)
+    
+    # @recipes = Recipe.where(Invitation.confirmed_record?(current_user.id, @recipe.user.id))
+    # @recipes = @user.recipes.all
+    # @recipes = @user.recipes.where(Invitation.confirmed_record?(current_user.id, @user.id))
+    # Invitation.reacted?(current_user.id, user.id)
+
 
   end
 
@@ -19,16 +42,6 @@ class UsersController < ApplicationController
   	@user = User.new
   end
 
-  # def create
-  # 	@user = User.new(params[:user])
-  # 	if @user.save
-  # 		session[:user_id] = @user.id
-  # 		flash[:notice] = "Thank you for signing up! You are Looged in."
-  # 		redirect_to root_url
-  # 	else
-  # 		render :action => 'new'
-  # 	end
-  # end
   
 ###################
 
@@ -60,6 +73,9 @@ class UsersController < ApplicationController
       end
     end
   end
+  def edit
+    @user = User.find(params[:id])
+  end
 
   # DELETE /users/1
   # DELETE /users/1.json
@@ -75,18 +91,12 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:first_name, :last_name, :email)
     end
 
     def set_user
       @user = User.find(params[:id])
     end
-
-
-    
-
-###################
-
 
   
 end

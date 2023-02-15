@@ -1,0 +1,82 @@
+<div class="main-content">
+	<div id="recipe_top" class="row">
+		<div class="col-md-4">
+			<div class="card card-body bg-light">
+				<% if @recipe.image.attached? %>
+					<%= image_tag(@recipe.image) %>
+				<% end %>
+
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="card card-body bg-light">
+				<h1><%= @recipe.title %></h1>
+				<p><%= @recipe.description %></p>
+				<p>
+					Submitted by
+					<%= @recipe.user.email %></p>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card card-body bg-light">
+				<div id="ingredient">
+					<h2>Ingredient</h2>
+					<ul>
+						<% @recipe.ingredients.each do |ingredient|  %>
+						<li>
+							<%= ingredient.name %>
+						</li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card card-body bg-light">
+				<div id="directions" class="directions">
+					<h2>Directions</h2>
+					<ol>
+						<% @recipe.directions.each.with_index do |direction|  %>
+						<li>
+							<span class="row">
+								<div class="col-md-6">
+									<%= direction.step %>
+								</div>
+								<div class="col-md-6">
+									<% if direction.image.attached? %>
+										<!-- <div class="direction-image"> -->
+											<%= image_tag(direction.image) %>
+										<!-- </div> -->
+									<% end %>
+								</div>
+							</span>
+						</li>
+						<hr>
+						<% end %>
+
+					</ol>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<div class="row">
+		<div class="col-md-12">
+			<%= link_to "Back", recipes_path, class: "btn btn-secondary" %>
+			<% if user_signed_in? %>
+				<%= link_to "Edit", edit_recipe_path, class: "btn btn-primary" %>
+				<%= link_to "Delete", recipe_path, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+
+
+
+

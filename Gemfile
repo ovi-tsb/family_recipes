@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '2.7.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6', '>= 5.2.6.2'
@@ -28,6 +28,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'has_friendship', '~> 1.1', '>= 1.1.8'
 gem 'jquery-rails' 
+gem 'simple_form', '~> 5.1'
+gem 'bootstrap', '~> 5.2', '>= 5.2.3'
+gem 'jquery-rails'
+gem 'cocoon', '~> 1.2', '>= 1.2.15'
+gem 'filterrific', '~> 5.2', '>= 5.2.3'
 
 
 group :development, :test do

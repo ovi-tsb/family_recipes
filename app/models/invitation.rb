@@ -1,5 +1,9 @@
 class Invitation < ApplicationRecord
-  belongs_to :user
+  belongs_to :user 
+
+  enum status: {  non_family: 0, 
+                  family: 1
+                   }
 
 ####################
   def self.reacted?(id1, id2)

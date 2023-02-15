@@ -3,11 +3,14 @@ Rails.application.routes.draw do
   get 'invitations/create'
   get 'invitations/destroy'
   get 'invitations/update'
+  get 'invitations/edit'
+
 # devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy'
 # end
 
   resources :invitations
   resources :friendconnects
+  resources :recipes
   # resources :users
   # get 'users/:id' => 'users#show'
   # get 'users/index'
@@ -21,9 +24,12 @@ Rails.application.routes.draw do
   
   devise_for :users
   get 'users/:id' => 'users#show', as: :users
+  # get 'users/:id' => 'users#index', as: :users
   
 
   root to: 'home#index'
+
+
 
 
  end

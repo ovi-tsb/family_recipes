@@ -1,11 +1,16 @@
-<%= link_to "Home", root_path %>
-
+<%= link_to "Home", root_path %> | 
+<%= link_to "My Page", users_path(current_user) %> |
+<%= link_to "Logout", destroy_user_session_path, method: :delete %> |
+<%= link_to "Setari", edit_user_registration_path(current_user) %> |
+<%= link_to "Retete", recipes_path(current_user) %>
+<%= link_to "Invitations", invitations_path(current_user) %>
 <h3>User Show page</h3>
 
-<h4> UserName: <%= current_user.email %></h4>
+<h4> UserName: <%= current_user.first_name %> <%= current_user.last_name %></h4>
+<h4>Email: <%= current_user.email %></h4>
 <p> ID: <%= current_user.id %></p>
 
-<h2>My requests</h2>
+<h2>Friends search</h2>
 
 <%= form_tag users_path, :method => 'get' do %>
 	
@@ -25,96 +30,134 @@
  	});
  </script>
 <hr>
-<h3>User list</h3>
 <div id="users">
 	<% if user_signed_in?  %>
-		<% @users.each do |user| %>
-
-		
-		
-		<%# User.all.where.not(id: current_user.id).each do |user| %>
-			<% if user.try(:type) != 'AdminUser' %>
-				<div class="user">
-					<p>
-						<%#= user.id %> 
-						
-						
-						<!-- ############ -->
-						<% if signed_in? && !Invitation.reacted?(current_user.id, user.id) && current_user != user  %>
-							<% if params[:search].present? %>
-								<div  class="show-view" >		
-									<td><%= user.email %></td>
-								  	<td> <%= link_to 'Send Invitation',
-								    invitations_create_path(ids: {id1: current_user.id, id2: user.id})
-
-								  %></td>
-								</div>
-							<% else %>
-								<div  class="hide-view" >	
-									<td><%= user.email %></td>
-							  		<td> <%= link_to 'Send Invitation',
-							    	invitations_create_path(ids: {id1: current_user.id, id2: user.id})
-
-							  		%></td>
-							  	</div>
+		<% if params[:search].present? %>
+		<h3>New friends list</h3>
+		<table>
+			<tr>
+				<td>Email</td>
+				<td>Name</td>
+				<td>Last Name</td>
+			</tr>
+			<% @users.each do |user| %>
+				
+				<% if user.try(:type) != 'AdminUser' %>
+					<div class="">
+							<!-- ############ -->
+							<% if signed_in? && !Invitation.reacted?(current_user.id, user.id) && current_user != user  %>
+								<tr>
+									<div  class="show-view" >
+										<td><%= user.email %></td>
+										<td><%= user.first_name %> <%= user.last_name %></td>
+									  	<td> <%= link_to 'Send Invitation',
+									    invitations_create_path(ids: {id1: current_user.id, id2: user.id})
+									  %></td>
+									</div>
+								</tr>
 							<% end %>
-						<% elsif signed_in? && Invitation.confirmed_record?(current_user.id, user.id) && current_user != user  %>
-							
-								<td><%= user.email %></td>
-							   	<td><b>Friend</b></td>
-							   	<td>
-								<% user.invitations.each do |invitation| %>
-							   	 	
-							   	 	<%= link_to 'Unfriend',
-				      invitations_destroy_path(invitation_id: invitation.id) %>
-				      				
-							   	
-							   	<% end %>
-
-							   		<%#= link_to 'Unfriend',
-							   	      invitations_destroy_path(invitation_id: user.invitations.ids) %>
-							   	</td>
-						   	 
-						<% end %>
-						<!-- ############ -->
-					</p>
-				</div>
+							<!-- ############ -->
+						
+					</div>
+				<% end %>
 			<% end %>
+			
+			
 		<% end %>
+		</table>
 	<% end %>
 </div>
 <!-- ################################## -->
+<% if @user.friends.exists? %>
+	
+	<h3>Friends list</h3>
+	<table>
+		<tr> 
+			<td><b>Email</b></td> 
+			<td><b>Nume</b></td>
+			<td>ID</td>
+			<td>Relation</td>
+		</tr>
+	<% @user.friends.each do |friend| %>
+	    
+	    <tr>
+	      <% if @user == current_user %>
+	      	
+	      	<td><%= friend.email %> - </td>
+	      	<td><%= friend.name %> - </td>
+	      	<td> ID: <%= friend.id %> - </td>
+	      	    
+	      	     <td><b><%= friend.status %></b></td>
+	      	 <td><%= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td>
+	      	
+	      	<td><%= link_to 'Unfriend',
+	      invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id)) %>
+	      </td>
+	      <% end %>
+	   	</tr>	
+<% end %>
+</table>
 
-
-<hr>
-
-
-<%# if user_signed_in?  %>
-		
-		<% @users.each do |user| %>
-		<%# User.all.where.not(:id=>current_user.id).each do |user| %>
-		
-			
-			<ol>
-			  <% user.invitations.each do |invitation| %>
-			    <%  if invitation.confirmed != true && user.id != current_user.id %>
-			    <h3> These people wants to be friend with you </h3>	
-			    <li>
-			      <%#= User.find(invitation.user_id).email %>
-			      
-			      	<%= User.find(invitation.user_id).email %>
-			      <%# end %>
-			      <%= link_to 'Accept Invitation',
-			      invitations_update_path(invitation_id: invitation.id) %> - 
-			      <%= link_to 'Reject Invitation',
-			      invitations_destroy_path(invitation_id: invitation.id) %>
-			    </li>
-			    <% end %>
-			  <% end %>
-			</ol>
-			
-		<% end %>
+<h3>Second Friends list</h3>
+	<table>
+		<tr> 
+			<td><b>Friend ID</b></td> 
+			<td><b> | User ID</b></td>
+			<td><b> | Invitation ID</b></td>
+			<td><b> | Relation</b></td>
+		</tr>	
+	<% @user.invitations.where(:confirmed => true).each do |invitation| %>
+	    <%# if @user.invitations.exists? %>
+	    <tr>
+	      <% if @user == current_user %>
+	      	<td><%= invitation.friend_id %> - </td>
+	      	<td><%= invitation.user_id %> - </td>
+	      	<td><%= invitation.id %> - </td>
+	      	<td><%= invitation.status %> - </td>
+	      	<td><%= link_to "Edit", invitations_edit_path(invitation_id: Invitation.find_invitation(@user.id, invitation.friend_id)), class: "btn btn-primary" %></td>
+	      	<td><%= link_to 'Unfriend',
+	      invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, invitation.friend_id)) %>
+	      </td>
+	      
+	      
+	      <% end %>
+	   	</tr>	
+				   	
+	<% end %>
 <%# end %>
+	</table>
+
+		
+<% end %>
+
+<% if @user.pending_invitations.exists? %>
+	<h3>Pending Invitations</h3>
+
+	<ol>
+		<% @user.pending_invitations.each do |invitation|  %>
+		
+		<li>
+			<%= User.find(invitation.user_id).first_name %>
+			<%= User.find(invitation.user_id).last_name %>
+			<%= invitation.id %>
+	<!----------- to not have error to accept invitation keep ->(invitation_id: invitation.id) -->
+			<%= link_to 'Accept Invitation',
+		      invitations_update_path(invitation_id: invitation.id) %> - 
+		    
+	<!----------- to not have error to reject invitation keep ->(invitation_id: invitation.id) -->
+			<%= link_to 'Reject Invitation',
+		      invitations_destroy_path(invitation_id: invitation.id) %>
+		   
+		    <%#= link_to 'Accept Invitation',
+		            invitations_update_path(invitation_id: invitation.id) %>
+		    <%#= link_to 'Reject Invitation',
+		            invitations_destroy_path(invitation_id: invitation.id) %>
+			
+		</li>
+		
+		<% end %>
+	</ol>
+<% end %>
 <!-- ################################## -->
 
 

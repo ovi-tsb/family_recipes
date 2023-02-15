@@ -1,0 +1,25 @@
+<h2>Lista</h2>
+
+<div id="filterrific_results">
+  <div class="row">
+    <% @recipe.each do |recipe| %>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="recipe">
+          <div class="image_wrapper">
+            <% if recipe.image.attached? %>
+              <%= link_to recipe do %>
+                <%= image_tag(recipe.image) %>
+              <% end %>
+            <% end %> 
+          </div>
+          <h2><%= link_to recipe.title.capitalize, recipe %></h2>
+          <h3>by: <%= recipe.user.name %></h3>
+        </div>
+      </div>
+      
+    <% end %>
+
+  </div>
+</div>        
+  
+  

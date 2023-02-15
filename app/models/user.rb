@@ -1,20 +1,18 @@
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-
-         has_many :friendconnects
-         has_many :friends, :through => :friendconnects
-         has_many :inverse_friendconnects, :class_name => "Friendconnect", :foreign_key => "friend_id"
-         has_many :inverse_friends, :through => :inverse_friendconnects, :source => :user
-  # has_friendship
-
+  enum status: {  friend: 0, 
+                  family: 1
+                   }
 
 ####################
-         has_many :invitations
-         has_many :pending_invitations, -> { where confirmed: false }, class_name: 'Invitation', foreign_key: "friend_id"
+         has_many :invitations, dependent: :destroy
+         has_many :pending_invitations, -> { where confirmed: false }, class_name: 'Invitation', foreign_key: "friend_id", dependent: :destroy
+         has_many :recipes, dependent: :destroy
 
          def friends
            friends_i_sent_invitation = Invitation.where(user_id: id, confirmed: true).pluck(:friend_id)
@@ -30,6 +28,10 @@ class User < ApplicationRecord
          def send_invitation(user)
            invitations.create(friend_id: user.id)
          end
+
+         def name
+           [first_name, last_name].select(&:present?).join(' ').titleize
+         end
 ####################
 
 
@@ -37,7 +39,7 @@ class User < ApplicationRecord
     
     if search
       # find(:all, :conditions => ['email LIKE ?', "%#{search}%"])
-      where('email ILIKE ?', "%#{search}%" )
+      where('email ILIKE ? OR first_name ILIKE ? OR last_name ILIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
 
     else
       # find(:all)
@@ -48,8 +50,5 @@ class User < ApplicationRecord
     end
 
   end
-# signed_in? && Invitation.confirmed_record?(current_user.id, user.id) && current_user != user
-
-
 
 end

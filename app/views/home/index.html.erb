@@ -2,19 +2,18 @@
 <p>Find me in app/views/home/index.html.erb</p>
 <%#= link_to 'New User', new_user_registration_path %>
 <% if user_signed_in?  %>
-	<%#= link_to "Logout", destroy_user_session_path, method: :delete %>
+	
 	<%= link_to "Logout", destroy_user_session_path, method: :delete %>
-	<h3>You are logged as <%= current_user.email %></h3>
+	| <%= link_to "Setari", edit_user_registration_path(current_user) %>
+	<h3>You are logged as: <%= current_user.first_name %> <%= current_user.last_name %>
+		<br> Your email is:	<%= current_user.email %></h3>
 	<h3>ID: <%= current_user.id %></h3>
 	<br>
-	<%= link_to "Profile", users_path(current_user) %>
+	<%= link_to "My Page", users_path(current_user) %>
+	
 	
 <% else %>
 	<%= link_to "Login", new_user_session_path %>	
 <% end %>
-
-
-
-
 
 

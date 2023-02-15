@@ -1,0 +1,33 @@
+<%= form_for @invitation do |f| %>
+	<% if @invitation.errors.any? %>
+		<div id="errors">
+			<h3>
+				<%= @invitation.errors.count %>
+				prohibited this recipe from being saved:
+			</h3>
+			<ul>
+				<% @invitation.errors.full_messages.each do |msg| %>
+				<li>
+					<%= msg %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	
+	<% end %>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-6">
+				
+				<div class="field">
+					<%= f.label :status, "Friend" %>
+					<%= f.radio_button :status, 'non_family' %>
+				
+					<%= f.label :status, 'Family' %>
+					<%= f.radio_button :status, 'family' %>
+				</div>
+			</div>
+			
+		</div>
+<%= f.button :submit, class: "btn btn-primary", data: {confirm: 'Do you want to change "' + @invitation.status.titleize + '" status ?' } %>
+<% end %>

@@ -1,0 +1,48 @@
+<%= link_to "Home", root_path %> |
+<%= link_to "My Page", users_path(current_user) %> | 
+<%= link_to "Logout", destroy_user_session_path, method: :delete %> |
+<%= link_to "Setari", edit_user_registration_path(current_user) %> |
+<%= link_to "Retete", recipes_path(current_user) %>
+<h1>Index pentru retete</h1>
+<hr>
+<%= form_tag recipes_path, :method => 'get' do %>
+	
+	<p>
+		<%= text_field_tag :search, params[:search] %>
+
+		<% friend = current_user.friends.map{|f| [f.name]} << current_user.name %>
+		<%= select_tag :friend_filter, options_for_select(friend), {:include_blank => 'Select'}%>
+
+	</p>
+	<p>
+		<%= submit_tag "Search", :name => nil, class:'btn btn-dark', id:'search_submit' %>
+		<%= button_tag 'CLEAR', id: 'clear_form_button' %>
+	</p>
+
+	<script>
+	    function clickSubmit() {
+	        $("#search_submit").trigger("click");
+	    }
+	</script>
+	<script type='text/javascript'>
+		$(document).ready(function () {
+
+			$("#clear_form_button").on("click", function() {
+			  $("#search").val("");
+			});
+		});
+	</script>
+<% end %>
+
+<hr>
+<%= render 'recipes/list' %>
+<hr>
+
+<% if user_signed_in? %>
+	<%= link_to "New Recipes", new_recipe_path, class: "btn btn-primary" %>
+	<%=link_to "Sign Out", destroy_user_session_path,   method: :delete %>
+	
+<% else %>
+	<%= link_to "Sing Up", new_user_registration_path %>
+	<%= link_to "Sing In", new_user_session_path %>
+<% end %>

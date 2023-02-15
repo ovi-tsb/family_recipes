@@ -13,6 +13,8 @@
 //= require rails-ujs
 //= require jquery 
 //= require jquery_ujs
+//= require filterrific/filterrific-jquery
 //= require activestorage
+//= require cocoon
 //= require turbolinks
 //= require_tree .

@@ -1,0 +1,10 @@
+<div class="form-inline clearfix">
+	<div class="nested-fields">
+		<%= f.input :step, input_html: { class: "form-input form-control" } %>
+		<%= link_to_remove_association "Delete", f, class: "form-button btn btn-danger btn-sm" %>
+		<div class="field">
+			<%= f.label :image %>
+			<%= f.file_field :image %>
+		</div>
+	</div>
+</div>
