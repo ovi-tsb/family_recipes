@@ -30,7 +30,6 @@ gem 'has_friendship', '~> 1.1', '>= 1.1.8'
 gem 'jquery-rails' 
 gem 'simple_form', '~> 5.1'
 gem 'bootstrap', '~> 5.2', '>= 5.2.3'
-gem 'jquery-rails'
 gem 'cocoon', '~> 1.2', '>= 1.2.15'
 gem 'filterrific', '~> 5.2', '>= 5.2.3'
 

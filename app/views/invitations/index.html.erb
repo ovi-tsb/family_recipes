@@ -16,7 +16,7 @@
 
 <% current_user.invitations.each do |invitation|  %>
 	<tr>
-		<td><%= invitation.user.name %></td>
+		<td><%= invitation.friend.name %></td>
 		<td><%= invitation.id %></td>
 		<td><%= invitation.status %></td>
 		<td><%= link_to "Edit", edit_invitation_path(invitation), class: "btn btn-primary" %></td>
@@ -27,7 +27,7 @@
 
 <% current_user.pending_invitations.each do |invitation|  %>
 	<tr>
-		<td><%= invitation.user.name %></td>
+		<td><%= invitation.friend.name %></td>
 		<td><%= invitation.id %></td>
 		<td><%= invitation.status %></td>
 		<td><%= link_to "Edit", edit_invitation_path(invitation), class: "btn btn-primary" %></td>

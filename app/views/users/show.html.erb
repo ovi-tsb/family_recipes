@@ -23,7 +23,6 @@
 <%#= javascript_pack_tag 'clear' %>
  <script type='text/javascript'>
  	$(document).ready(function () {
-
  		$("#clear_form_button").on("click", function() {
  		  $("#search").val("");
  		});
@@ -38,10 +37,9 @@
 			<tr>
 				<td>Email</td>
 				<td>Name</td>
-				<td>Last Name</td>
+				<td>Action</td>
 			</tr>
 			<% @users.each do |user| %>
-				
 				<% if user.try(:type) != 'AdminUser' %>
 					<div class="">
 							<!-- ############ -->
@@ -50,14 +48,12 @@
 									<div  class="show-view" >
 										<td><%= user.email %></td>
 										<td><%= user.first_name %> <%= user.last_name %></td>
-									  	<td> <%= link_to 'Send Invitation',
-									    invitations_create_path(ids: {id1: current_user.id, id2: user.id})
-									  %></td>
+									  	<td><%= link_to 'Invite as family', invitations_create_path(ids: {id1: current_user.id, id2: user.id}, status: :family) %></td>
+									  	<td><%= link_to 'Invite as friend', invitations_create_path(ids: {id1: current_user.id, id2: user.id}, status: :friend) %></td>
 									</div>
 								</tr>
 							<% end %>
 							<!-- ############ -->
-						
 					</div>
 				<% end %>
 			<% end %>
@@ -68,37 +64,37 @@
 	<% end %>
 </div>
 <!-- ################################## -->
-<% if @user.friends.exists? %>
+<% if @user.friends.any? %>
 	
 	<h3>Friends list</h3>
 	<table>
 		<tr> 
+			<td>ID</td>
 			<td><b>Email</b></td> 
 			<td><b>Nume</b></td>
-			<td>ID</td>
-			<td>Relation</td>
+			<td>Relationship</td>
+			<td></td>
+			<td></td>
 		</tr>
-	<% @user.friends.each do |friend| %>
+	      <% if @user == current_user %>
+	<% 
+		@user.friendconnects.each do |friendconnect|
+		friend = friendconnect.friend
+	%>
 	    
 	    <tr>
-	      <% if @user == current_user %>
-	      	
+	      	<td> ID: <%= friend.id %> - </td>
 	      	<td><%= friend.email %> - </td>
 	      	<td><%= friend.name %> - </td>
-	      	<td> ID: <%= friend.id %> - </td>
-	      	    
-	      	     <td><b><%= friend.status %></b></td>
-	      	 <td><%= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td>
-	      	
-	      	<td><%= link_to 'Unfriend',
-	      invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id)) %>
-	      </td>
-	      <% end %>
+	      	<td><b><%= friend.status %></b></td>
+	      	<td><%= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td>
+	      	<td><%= link_to 'Unfriend', friendconnect_path(friend), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	   	</tr>	
 <% end %>
+	<% end %>
 </table>
 
-<h3>Second Friends list</h3>
+<h3>Invitation list</h3>
 	<table>
 		<tr> 
 			<td><b>Friend ID</b></td> 
@@ -115,11 +111,7 @@
 	      	<td><%= invitation.id %> - </td>
 	      	<td><%= invitation.status %> - </td>
 	      	<td><%= link_to "Edit", invitations_edit_path(invitation_id: Invitation.find_invitation(@user.id, invitation.friend_id)), class: "btn btn-primary" %></td>
-	      	<td><%= link_to 'Unfriend',
-	      invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, invitation.friend_id)) %>
-	      </td>
-	      
-	      
+	      	<td><%= link_to 'delete request', invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, invitation.friend_id)) %></td>
 	      <% end %>
 	   	</tr>	
 				   	
