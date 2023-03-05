@@ -5,6 +5,10 @@ class InvitationsController < ApplicationController
 
   def index; end
 
+  def show
+    render 'edit'
+  end
+
   def edit; end
 
   def new; end
@@ -18,7 +22,7 @@ class InvitationsController < ApplicationController
   end
 
   def destroy
-    invitation.destroy
+    @invitation.destroy
 
     redirect_to users_path(current_user.id)
   end

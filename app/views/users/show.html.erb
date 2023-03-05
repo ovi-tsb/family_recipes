@@ -48,8 +48,8 @@
 									<div  class="show-view" >
 										<td><%= user.email %></td>
 										<td><%= user.first_name %> <%= user.last_name %></td>
-									  	<td><%= link_to 'Invite as family', invitations_create_path(ids: {id1: current_user.id, id2: user.id}, status: :family) %></td>
-									  	<td><%= link_to 'Invite as friend', invitations_create_path(ids: {id1: current_user.id, id2: user.id}, status: :friend) %></td>
+									  	<td><%= link_to 'Invite as family', invitations_create_path(ids: {id1: current_user.id, id2: user.id}, status: :family), class: "btn btn-info" %></td>
+									  	<td><%= link_to 'Invite as friend', invitations_create_path(ids: {id1: current_user.id, id2: user.id}, status: :friend), class: "btn btn-info" %></td>
 									</div>
 								</tr>
 							<% end %>
@@ -88,7 +88,7 @@
 	      	<td><%= friend.name %> - </td>
 	      	<td><b><%= friend.status %></b></td>
 	      	<td><%= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td>
-	      	<td><%= link_to 'Unfriend', friendconnect_path(friend), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      	<td><%= link_to 'Unfriend', friendconnect_path(friend), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	   	</tr>	
 <% end %>
 	<% end %>
@@ -98,20 +98,16 @@
 	<table>
 		<tr> 
 			<td><b>Friend ID</b></td> 
-			<td><b> | User ID</b></td>
-			<td><b> | Invitation ID</b></td>
 			<td><b> | Relation</b></td>
 		</tr>	
 	<% @user.invitations.where(:confirmed => true).each do |invitation| %>
 	    <%# if @user.invitations.exists? %>
 	    <tr>
 	      <% if @user == current_user %>
-	      	<td><%= invitation.friend_id %> - </td>
-	      	<td><%= invitation.user_id %> - </td>
-	      	<td><%= invitation.id %> - </td>
+	      	<td><%= invitation.friend.name %> - </td>
 	      	<td><%= invitation.status %> - </td>
-	      	<td><%= link_to "Edit", invitations_edit_path(invitation_id: Invitation.find_invitation(@user.id, invitation.friend_id)), class: "btn btn-primary" %></td>
-	      	<td><%= link_to 'delete request', invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, invitation.friend_id)) %></td>
+	      	<td><%= link_to "Edit", invitation_path(invitation), class: "btn btn-primary" %></td>
+	      	<td><%= link_to 'delete request', invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	      <% end %>
 	   	</tr>	
 				   	
@@ -125,30 +121,17 @@
 <% if @user.pending_invitations.exists? %>
 	<h3>Pending Invitations</h3>
 
-	<ol>
+	<ul>
 		<% @user.pending_invitations.each do |invitation|  %>
-		
-		<li>
-			<%= User.find(invitation.user_id).first_name %>
-			<%= User.find(invitation.user_id).last_name %>
-			<%= invitation.id %>
-	<!----------- to not have error to accept invitation keep ->(invitation_id: invitation.id) -->
-			<%= link_to 'Accept Invitation',
-		      invitations_update_path(invitation_id: invitation.id) %> - 
-		    
-	<!----------- to not have error to reject invitation keep ->(invitation_id: invitation.id) -->
-			<%= link_to 'Reject Invitation',
-		      invitations_destroy_path(invitation_id: invitation.id) %>
-		   
-		    <%#= link_to 'Accept Invitation',
-		            invitations_update_path(invitation_id: invitation.id) %>
-		    <%#= link_to 'Reject Invitation',
-		            invitations_destroy_path(invitation_id: invitation.id) %>
-			
-		</li>
-		
+			<li>
+				<%= invitation.user.name %>
+				<%= invitation.user.email %>
+				<%= invitation.status %>
+				<%= link_to 'Accept Invitation', invitation_path(invitation), class: "btn btn-primary" %> - 
+				<%= link_to 'Reject Invitation', invitation_path(invitation), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+			</li>
 		<% end %>
-	</ol>
+	</ul>
 <% end %>
 <!-- ################################## -->
 
