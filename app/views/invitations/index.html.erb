@@ -30,7 +30,7 @@
 		<td><%= invitation.id %></td>
 		<td><%= invitation.status %></td>
 		<td><%= link_to "Edit", edit_invitation_path(invitation), class: "btn btn-primary" %></td>
-		<td><%= link_to 'Accept Invitation', invitations_update_path(id: invitation.id) %></td>
+		<td><%= link_to 'Accept Invitation', invitation_path(invitation), class: "btn btn-primary" %></td>
 	</tr>
 
 <% end %>

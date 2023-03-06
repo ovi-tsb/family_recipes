@@ -60,10 +60,8 @@
 			      
 			      	<%= User.find(invitation.user_id).email %>
 			      <%# end %>
-			      <%= link_to 'Accept Invitation',
-			      invitations_update_path(invitation_id: invitation.id) %> - 
-			      <%= link_to 'Reject Invitation',
-			      invitations_destroy_path(invitation_id: invitation.id) %>
+			      <%= link_to 'Accept Invitation', class: "btn btn-primary", invitation_path(invitation) %> - 
+			      <%= link_to 'Reject Invitation', class: "btn btn-danger", method: :delete, invitation_path(invitation) %>
 			    </li>
 			    <% end %>
 			  <% end %>
