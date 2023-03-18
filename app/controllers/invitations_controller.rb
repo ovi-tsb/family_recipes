@@ -30,8 +30,8 @@ class InvitationsController < ApplicationController
   def update
     ### no error to accept invitation
     ### error to accept invitation
-    @invitation.update(status: invitation_params[:status])
-    redirect_to invitations_path(current_user.id)
+    @invitation.update(status: invitation_params[:status], confirmed: true)
+    redirect_to users_path(current_user.id)
   end
 
   private

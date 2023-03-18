@@ -7,27 +7,25 @@
 			</h3>
 			<ul>
 				<% @invitation.errors.full_messages.each do |msg| %>
-				<li>
-					<%= msg %>
-				</li>
+					<li>
+						<%= msg %>
+					</li>
 				<% end %>
 			</ul>
 		</div>
-	
 	<% end %>
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-6">
-				
 				<div class="field">
 					<%= f.label :status, "Friend" %>
 					<%= f.radio_button :status, 'friend' %>
-				
+
 					<%= f.label :status, 'Family' %>
 					<%= f.radio_button :status, 'family' %>
 				</div>
 			</div>
-			
 		</div>
-<%= f.button :submit, class: "btn btn-primary", data: {confirm: 'Do you want to change "' + @invitation.status.titleize + '" status ?' } %>
+		<%= f.submit "Save invitation", class: "btn btn-primary", data: {confirm: 'Do you want to change "' + @invitation.status.titleize + '" status ?' } %>
+	</div>
 <% end %>
