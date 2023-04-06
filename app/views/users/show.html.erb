@@ -78,17 +78,21 @@
 		</tr>
 	      <% if @user == current_user %>
 	<% 
-		@user.friendconnects.each do |friendconnect|
-		friend = friendconnect.friend
+		@user.friends.each do |friend|
+		# friend = friendconnect.friend
 	%>
 	    
 	    <tr>
 	      	<td> ID: <%= friend.id %> - </td>
 	      	<td><%= friend.email %> - </td>
 	      	<td><%= friend.name %> - </td>
-	      	<td><b><%= friend.status %></b></td>
-	      	<td><%= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td>
-	      	<td><%= link_to 'Unfriend', friendconnect_path(friend), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		    <td><b><%= friend.status %></b></td>
+	      	<!-- <td><%#= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td> -->
+	      	<td><%= link_to "Edit", invitations_edit_path(id: Invitation.find_invitation(@user.id, friend.id)), class: "btn btn-primary" %></td>
+	      	<!-- <td><%#= link_to 'Unfriend', friendconnect_path(friend), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+	      	<td><%= link_to 'Unfriend',
+	      invitations_destroy_path(id: Invitation.find_invitation(@user.id, friend.id)), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?'} %>
+	      </td>
 	   	</tr>	
 <% end %>
 	<% end %>
@@ -97,13 +101,17 @@
 <h3>Invitation list</h3>
 	<table>
 		<tr> 
-			<td><b>Friend ID</b></td> 
-			<td><b> | Relation</b></td>
+			<td><b>Invitation ID</b></td> 
+			<td><b>Friend ID</b></td>
+			<td><b>| Name</b></td> 
+			<td><b>| Relation</b></td>
 		</tr>	
 	<% @user.invitations.where(:confirmed => true).each do |invitation| %>
 	    <%# if @user.invitations.exists? %>
 	    <tr>
 	      <% if @user == current_user %>
+	      	<td><%= invitation.id %> - </td>
+	      	<td><%= invitation.friend_id %> - </td>
 	      	<td><%= invitation.friend.name %> - </td>
 	      	<td><%= invitation.status %> - </td>
 	      	<td><%= link_to "Edit", invitation_path(invitation), class: "btn btn-primary" %></td>
@@ -134,6 +142,8 @@
 	</ul>
 <% end %>
 <!-- ################################## -->
+
+
 
 
 
