@@ -17,15 +17,26 @@
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-md-6">
-				<div class="field">
-					<%= f.label :status, "Friend" %>
-					<%= f.radio_button :status, 'friend' %>
+				<div class="form-group">
+					<label for="friend_group">Status</label>
+					<div class="field">
+						<%= f.label :status, "Friend" %>
+						<%= f.radio_button :status, 'friend' %>
 
-					<%= f.label :status, 'Family' %>
-					<%= f.radio_button :status, 'family' %>
+						<%= f.label :status, 'Family' %>
+						<%= f.radio_button :status, 'family' %>
+					</div>
 				</div>
 			</div>
 		</div>
-		<%= f.submit "Save invitation", class: "btn btn-primary", data: {confirm: 'Do you want to change "' + @invitation.status.titleize + '" status ?' } %>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="friend_group">Group</label>
+					<%= f.select :group, current_user.groups.map { |r| [r.name, r.id] }, include_blank: true %>
+				</div>
+			</div>
+		</div>
+		<%= f.submit "Save invitation", class: "btn btn-primary" %>
 	</div>
 <% end %>

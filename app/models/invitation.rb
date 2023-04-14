@@ -4,6 +4,8 @@ class Invitation < ApplicationRecord
   belongs_to :user
   belongs_to :friend, class_name: 'User'
 
+  attr_accessor :group
+
   enum status: {  friend: 0,
                   family: 1 }
 

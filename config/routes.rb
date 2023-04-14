@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :invitations
   resources :friendconnects
   resources :recipes
+  resources :groups
   # resources :users
   # get 'users/:id' => 'users#show'
   # get 'users/index'
