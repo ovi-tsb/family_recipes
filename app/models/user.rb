@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
 
   has_many :memberships
-  has_many :groups
+  has_many :groups, through: :invitations
 
   def friends
     friends_i_sent_invitation = Invitation.where(user_id: id, confirmed: true).pluck(:friend_id)

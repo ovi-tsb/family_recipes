@@ -33,7 +33,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="friend_group">Group</label>
-					<%= f.select :group, current_user.groups.map { |r| [r.name, r.id] }, include_blank: true %>
+					<%= f.select :group_id, Group.pluck(:name, :id), include_blank: true %>
 				</div>
 			</div>
 		</div>

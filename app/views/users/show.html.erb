@@ -74,20 +74,20 @@
 	      <% if @user == current_user %>
 	<%
 		@user.friends.each do |friend|
-		# friend = friendconnect.friend
+			invitation = Invitation.find_invitation(current_user.id, friend.id)
 	%>
 
 	    <tr>
-	      	<td> ID: <%= friend.id %> - </td>
-	      	<td><%= friend.email %> - </td>
-	      	<td><%= friend.name %> - </td>
-		    <td><b><%= friend.status %></b></td>
-		    <td><b><%= friend.memberships.where(group: current_user.groups).first&.group %></b></td>
+	      	<td><%= friend.id %></td>
+	      	<td><%= friend.email %></td>
+	      	<td><%= friend.name %></td>
+					<td><b><%= invitation.status %></b></td>
+					<td><b><%= invitation&.group %></b></td>
 	      	<!-- <td><%#= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td> -->
-	      	<td><%= link_to "Edit", edit_invitation_path(Invitation.find_invitation(@user.id, friend.id)), class: "btn btn-primary" %></td>
+	      	<td><%= link_to "Edit", edit_invitation_path(invitation), class: "btn btn-primary"  %></td>
 	      	<!-- <td><%#= link_to 'Unfriend', friendconnect_path(friend), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
 	      	<td><%= link_to 'Unfriend',
-	      invitations_destroy_path(id: Invitation.find_invitation(@user.id, friend.id)), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?'} %>
+	      invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?'} %>
 	      </td>
 	   	</tr>
 <% end %>
@@ -107,11 +107,11 @@
 	    <%# if @user.invitations.exists? %>
 	    <tr>
 	      <% if @user == current_user %>
-	      	<td><%= invitation.id %> - </td>
-	      	<td><%= invitation.friend_id %> - </td>
-	      	<td><%= invitation.friend.name %> - </td>
-	      	<td><%= invitation.status %> - </td>
-		    <td><b><%= invitation.friend.memberships.where(group: current_user.groups).first&.group %></b></td>
+	      	<td><%= invitation.id %></td>
+	      	<td><%= invitation.friend_id %></td>
+	      	<td><%= invitation.friend.name %></td>
+	      	<td><%= invitation.status %></td>
+		    <td><b><%= invitation.group %></b></td>
 	      	<td><%= link_to "Edit", invitation_path(invitation), class: "btn btn-primary" %></td>
 	      	<td><%= link_to 'delete request', invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	      <% end %>

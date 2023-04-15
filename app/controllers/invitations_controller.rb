@@ -30,30 +30,21 @@ class InvitationsController < ApplicationController
   def update
     ### no error to accept invitation
     ### error to accept invitation
-    @invitation.update(status: invitation_params[:status])
+    @invitation.update!(invitation_params)
 
-    friend = @invitation.friend
-    if friend == current_user
-      # current user is the invitee, so he can confirm the invitation
-      @invitation.update(confirmed: true)
-      # set membership for the inviting user instead
-      friend = @invitation.user
-    end
-    friend.memberships.where(group: current_user.groups).destroy_all
-    friend.memberships.create(group_id: invitation_params[:group])
-    redirect_to users_path(current_user.id)
+    # current user is the invitee, so he can confirm the invitation
+    @invitation.update(confirmed: true) if @invitation.friend == current_user
+
+    redirect_to users_path(current_user)
   end
 
   private
 
   def invitation_params
-    params.require(:invitation).permit(:status, :date, :group)
+    params.require(:invitation).permit(:status, :group_id)
   end
 
   def find_invitation
     @invitation = Invitation.find(params[:id])
-    friend = @invitation.friend
-    friend = @invitation.user if friend == current_user
-    @invitation.group = friend.memberships.where(group: current_user.groups).first&.group_id
   end
 end

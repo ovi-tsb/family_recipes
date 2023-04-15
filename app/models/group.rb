@@ -1,7 +1,6 @@
 class Group < ApplicationRecord
-  belongs_to :user
-  has_many :memberships
-  has_many :users, through: :memberships
+  has_many :invitations
+  has_many :users, through: :invitations
 
   def to_s
     name
