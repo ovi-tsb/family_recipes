@@ -3,7 +3,6 @@
 class Invitation < ApplicationRecord
   belongs_to :user
   belongs_to :friend, class_name: 'User'
-  belongs_to :group, optional: true
 
   enum status: {  friend: 0,
                   family: 1 }
@@ -26,6 +25,14 @@ class Invitation < ApplicationRecord
       Invitation.where(user_id: id2, friend_id: id1, confirmed: true).first
     else
       Invitation.where(user_id: id1, friend_id: id2, confirmed: true).first
+    end
+  end
+
+  def group(current_user)
+    if current_user == user
+      friend.membership_with(user)
+    else
+      user.membership_with(friend)
     end
   end
   ######################

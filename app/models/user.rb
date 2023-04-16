@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :friendconnects, dependent: :destroy
   has_many :recipes, dependent: :destroy
 
-  has_many :memberships
+  has_many :memberships, foreign_key: :member_id
   has_many :groups, through: :invitations
 
   def friends
@@ -26,6 +26,10 @@ class User < ApplicationRecord
 
   def friend_with?(user)
     Invitation.confirmed_record?(id, user.id)
+  end
+
+  def membership_with(user)
+    memberships.where(user: user).first&.group
   end
 
   def send_invitation(user)

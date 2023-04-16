@@ -35,13 +35,18 @@ class InvitationsController < ApplicationController
     # current user is the invitee, so he can confirm the invitation
     @invitation.update(confirmed: true) if @invitation.friend == current_user
 
+    friend = @invitation.friend
+    friend = @invitation.user if friend == current_user
+    friend.memberships.where(user: current_user).destroy_all
+    friend.memberships.where(user: current_user).create!(group_id: params[:group_id])
+
     redirect_to users_path(current_user)
   end
 
   private
 
   def invitation_params
-    params.require(:invitation).permit(:status, :group_id)
+    params.require(:invitation).permit(:status)
   end
 
   def find_invitation

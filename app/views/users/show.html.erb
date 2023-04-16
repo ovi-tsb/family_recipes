@@ -82,7 +82,7 @@
 	      	<td><%= friend.email %></td>
 	      	<td><%= friend.name %></td>
 					<td><b><%= invitation.status %></b></td>
-					<td><b><%= invitation&.group %></b></td>
+					<td><b><%= friend.membership_with(current_user) %></b></td>
 	      	<!-- <td><%#= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td> -->
 	      	<td><%= link_to "Edit", edit_invitation_path(invitation), class: "btn btn-primary"  %></td>
 	      	<!-- <td><%#= link_to 'Unfriend', friendconnect_path(friend), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
@@ -94,6 +94,7 @@
 	<% end %>
 </table>
 
+<% if @user == current_user %>
 <h3>Invitation list</h3>
 	<table>
 		<tr>
@@ -103,23 +104,19 @@
 			<td><b>Status</b></td>
 			<td><b>Group</b></td>
 		</tr>
-	<% @user.invitations.where(:confirmed => true).each do |invitation| %>
-	    <%# if @user.invitations.exists? %>
+		<% @user.invitations.where(:confirmed => true).each do |invitation| %>
 	    <tr>
-	      <% if @user == current_user %>
-	      	<td><%= invitation.id %></td>
-	      	<td><%= invitation.friend_id %></td>
-	      	<td><%= invitation.friend.name %></td>
-	      	<td><%= invitation.status %></td>
-		    <td><b><%= invitation.group %></b></td>
-	      	<td><%= link_to "Edit", invitation_path(invitation), class: "btn btn-primary" %></td>
-	      	<td><%= link_to 'delete request', invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	      <% end %>
+				<td><%= invitation.id %></td>
+				<td><%= invitation.friend_id %></td>
+				<td><%= invitation.friend.name %></td>
+				<td><%= invitation.status %></td>
+				<td><%= invitation.friend.membership_with(current_user) %></td>
+				<td><%= link_to "Edit", invitation_path(invitation), class: "btn btn-primary" %></td>
+				<td><%= link_to 'delete request', invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	   	</tr>
-
-	<% end %>
-<%# end %>
+		<% end %>
 	</table>
+<% end %>
 
 
 <% end %>

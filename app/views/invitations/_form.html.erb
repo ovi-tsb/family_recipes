@@ -33,7 +33,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="friend_group">Group</label>
-					<%= f.select :group_id, Group.pluck(:name, :id), include_blank: true %>
+					<%= select_tag :group_id, options_for_select(Group.pluck(:name, :id), @invitation.group(current_user)&.id), include_blank: true %>
 				</div>
 			</div>
 		</div>
