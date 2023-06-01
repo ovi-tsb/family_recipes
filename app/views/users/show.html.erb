@@ -1,14 +1,13 @@
-<h3>User Show page</h3>
+<div class="main-content-recipe">
+<h4 class="margin-left">Show page of: <%= current_user.name %></h4>
+<h5 class="margin-left">Email: <%= current_user.email %></h5>
+<p class="margin-left"> ID: <%= current_user.id %></p>
 
-<h4> UserName: <%= current_user.first_name %> <%= current_user.last_name %></h4>
-<h4>Email: <%= current_user.email %></h4>
-<p> ID: <%= current_user.id %></p>
-
-<h2>Friends search</h2>
+<h2 class="margin-left">Friends search</h2>
 
 <%= form_tag users_path, :method => 'get' do %>
 
-	<p>
+	<p class="margin-left">
 		<%= text_field_tag :search, params[:search] %>
 		<%= submit_tag "Search", :name => nil %>
 		<%= button_tag 'CLEAR', id: 'clear_form_button' %>
@@ -26,114 +25,143 @@
 <div id="users">
 	<% if user_signed_in?  %>
 		<% if params[:search].present? %>
-		<h3>New friends list</h3>
-		<table>
-			<tr>
-				<td>Email</td>
-				<td>Name</td>
-				<td>Action</td>
-			</tr>
+		<h3 class="margin-left">New friends list</h3>
+		<table class="table table-sm table-striped ml-4" style="max-width: 35rem;">
+			<thead class="table-dark">
+				<tr>
+					<td>Name</td>
+					<td>Country</td>
+					<td>City</td>
+					<td>Action</td>
+				</tr>
+			</thead>
 			<% @users.each do |user| %>
 				<% if user.try(:type) != 'AdminUser' %>
-					<div class="">
+					
 							<!-- ############ -->
 							<% if signed_in? && !Invitation.reacted?(current_user.id, user.id) && current_user != user  %>
-								<tr>
-									<div  class="show-view" >
-										<td><%= user.email %></td>
-										<td><%= user.first_name %> <%= user.last_name %></td>
-									  	<td><%= link_to 'Invite as family', invitations_create_path(ids: {id1: current_user.id, id2: user.id}, status: :family), class: "btn btn-info" %></td>
-									  	<td><%= link_to 'Invite as friend', invitations_create_path(ids: {id1: current_user.id, id2: user.id}, status: :friend), class: "btn btn-info" %></td>
-									</div>
-								</tr>
+								<tbody>
+									<tr>
+									
+										<td><%= user.name %></td>
+										<td><%= user.country.capitalize  if user.country%></td>
+										<td><%= user.city.capitalize if user.city %></td>
+									  	<td><%= link_to 'Invite', invitations_create_path(ids: {id1: current_user.id, id2: user.id}), class: "btn btn-info" %></td>	  	
+										
+									</tr>
+							</tbody>
 							<% end %>
 							<!-- ############ -->
-					</div>
+					
 				<% end %>
 			<% end %>
-
-
-		<% end %>
 		</table>
+		
+		<% end %>
+		
 	<% end %>
 </div>
 <!-- ################################## -->
+<!-- ################-- Friends List --################## -->
+
 <% if @user.friends.any? %>
 
-	<h3>Friends list</h3>
-	<table>
-		<tr>
-			<td>ID</td>
-			<td><b>Email</b></td>
-			<td><b>Nume</b></td>
-			<td><b>Status</b></td>
-			<td><b>Group</b></td>
-			<td></td>
-			<td></td>
-		</tr>
-	      <% if @user == current_user %>
-	<%
-		@user.friends.each do |friend|
-			invitation = Invitation.find_invitation(current_user.id, friend.id)
-	%>
-
-	    <tr>
-	      	<td><%= friend.id %></td>
-	      	<td><%= friend.email %></td>
-	      	<td><%= friend.name %></td>
-					<td><b><%= invitation.status %></b></td>
+	<h3 class="margin-left">Friends list</h3>
+	<table class="table table-sm table-striped ml-4">
+		<thead class="table-dark">
+			<tr>
+				<td>#</td>
+				<!-- <td><b>Email</b></td> -->
+				<td><b>Nume</b></td>
+				<!-- <td><b>Status</b></td> -->
+				<td><b>Group</b></td>
+				<td><b>Edit Group</b></td>
+				<td></td>
+			</tr>
+		</thead>
+		
+	     <% if @user = current_user %>
+			<%
+				@user.friends.each_with_index do |friend, index|
+					invitation = Invitation.find_invitation(current_user.id, friend.id)
+					indexplusone = index+1
+			%>
+			    <tr>
+			      	<td><%= indexplusone %></td>
+			      	<td><%= friend.name %></td>
 					<td><b><%= friend.membership_with(current_user) %></b></td>
-	      	<!-- <td><%#= link_to "Edit", invitations_edit_path(@invitation), class: "btn btn-primary" %></td> -->
-	      	<td><%= link_to "Edit", edit_invitation_path(invitation), class: "btn btn-primary"  %></td>
-	      	<!-- <td><%#= link_to 'Unfriend', friendconnect_path(friend), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-	      	<td><%= link_to 'Unfriend',
-	      invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?'} %>
-	      </td>
-	   	</tr>
-<% end %>
+					<td><%= link_to "Edit", edit_invitation_path(invitation), class: "btn btn-primary"  %></td>
+			      	<td><%= link_to 'Unfriend',
+			      invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?'} %>
+			      </td>
+			   	</tr>
+		<% end %>
 	<% end %>
-</table>
+	</table>
 
-<% if @user == current_user %>
-<h3>Invitation list</h3>
-	<table>
-		<tr>
-			<td><b>Invitation ID</b></td>
-			<td><b>Friend ID</b></td>
-			<td><b>Name</b></td>
-			<td><b>Status</b></td>
-			<td><b>Group</b></td>
-		</tr>
-		<% @user.invitations.where(:confirmed => true).each do |invitation| %>
+
+<% end %>
+<!-- ################-- Pending Invitations --################## -->
+<% if @user.pending_invitations.exists? %>
+	<h3 class="margin-left">Pending Invitations</h3>
+
+	<table class="table table-sm table-striped ml-4" style="max-width: 35rem;">
+			<thead class="table-dark">
+				<tr>
+					<td>#</td>
+					<td>Name</td>
+					<td>From</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</thead>
+					<% @user.pending_invitations.each_with_index do |invitation, index|
+						indexplusone = index+1
+					  %>
+					<tr>	
+							<td><%= indexplusone %></td>
+							<td><%= invitation.user.name %></td>
+							<td><%= invitation.user.country %>,<%= invitation.user.city %></td>
+							
+							<td><%= link_to 'Accept Invitation', invitation_path(invitation), class: "btn btn-primary" %></td> 
+							<td><%= link_to 'Reject Invitation', invitation_path(invitation), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+					</tr>	
+					<% end %>
+	</table>			
+<% end %>
+
+<% if @user.invitations.where(:confirmed => false).exists? %>
+	<h3 class="margin-left">My Pending Invitations </h3>
+	<table class="table table-sm table-striped ml-4" style="max-width: 45rem;">
+		<thead class="table-dark">
+			<tr>
+				<td><b>#</b></td>
+				<!-- <td><b>Invitation ID</b></td> -->
+				<!-- <td><b>Friend ID</b></td> -->
+				<td><b>Name</b></td>
+				<td><b>Group</b></td>
+				<!-- <td><b>Edit Group</b></td> -->
+				<td></td>
+			</tr>
+		</thead>
+		<% @user.invitations.where(:confirmed => false).each_with_index do |invitation, index| %>
+		<% indexplusone = index+1 %>
 	    <tr>
-				<td><%= invitation.id %></td>
-				<td><%= invitation.friend_id %></td>
+				<td><%= indexplusone %></td>
+				<!-- <td><%= invitation.id %></td> -->
+				<!-- <td><%= invitation.friend_id %></td> -->
 				<td><%= invitation.friend.name %></td>
-				<td><%= invitation.status %></td>
-				<td><%= invitation.friend.membership_with(current_user) %></td>
-				<td><%= link_to "Edit", invitation_path(invitation), class: "btn btn-primary" %></td>
+				<% if invitation.friend.membership_with(current_user).blank? %>
+					<td><%= invitation.friend.membership_with(current_user) == invitation.status.capitalize %></td>
+				<% elsif %>
+					<td><%= invitation.friend.membership_with(current_user) %></td>
+				<% end %>
+				
+				<!-- <td><%#= link_to "Edit", invitation_path(invitation), class: "btn btn-primary" %></td> -->
 				<td><%= link_to 'delete request', invitation_path(invitation), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 	   	</tr>
-		<% end %>
+		<%end %>
 	</table>
 <% end %>
-
-
-<% end %>
-
-<% if @user.pending_invitations.exists? %>
-	<h3>Pending Invitations</h3>
-
-	<ul>
-		<% @user.pending_invitations.each do |invitation|  %>
-			<li>
-				<%= invitation.user.name %>
-				<%= invitation.user.email %>
-				<%= invitation.status %>
-				<%= link_to 'Accept Invitation', invitation_path(invitation), class: "btn btn-primary" %> -
-				<%= link_to 'Reject Invitation', invitation_path(invitation), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-			</li>
-		<% end %>
-	</ul>
-<% end %>
 <!-- ################################## -->
+</div>

@@ -1,0 +1,461 @@
+@import "bootstrap";
+@import 'home';
+
+
+.directions img{
+	width: 200px;
+	/*float: right*/
+}
+.direction-image{
+	/*float:right;*/
+}
+.image_wrapper img{
+	/*max-width: 200px;*/
+}
+
+
+/*//////////////////*/
+
+$red: #660000;
+
+body {;
+  background: rgb(235, 238, 243);
+  padding: 0px;
+}
+
+#notice_wrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  background: rgba(54, 245, 143, 0.7);
+  p {
+    padding: 2.5rem 0;
+    text-align: center;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+}
+
+.home-continer{
+   background: asset_url('home-background.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  font-family: sans-serif;
+}
+.main_content {
+  padding: 20px;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  @include box-shadow;
+  background: #fff;
+  font-weight: bold;
+}
+/*///////////// Nav ///////////////*/
+.navbar-collapse {
+  background-color:  #721227;
+  width: 100%;
+  margin-right: -16px;
+  margin-left: -16px;
+  padding-left: 25px;
+  z-index: 99;
+}
+.navbar-toggler {
+  color: #fff;
+  color: #7eb444;
+  border: 1px solid #fff;
+}
+.custom-toggler.navbar-toggler {
+    /*border-color: #dd93a6;*/
+    border: 2px solid #05a877;
+    filter: invert(100%);
+}
+
+
+.bg-body-tertiary {
+  margin-bottom: 30px;
+  --bs-bg-opacity: 1;
+  background-color:  #721227;
+  height: 80px;
+  @include box-shadow;
+  border: none;
+  .navbar-brand {
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 20px;
+    color: #c2b9c9;
+    a {
+      color: $red;
+    }
+    
+  }
+  .nav-link  {
+    /*border: 1px solid red;*/
+    color: #dd93a6;
+    font-weight: 400;
+  }
+}
+
+/*/////////////search/////////////////  /*/
+
+
+select::-ms-expand {
+  display: none;
+}
+select {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0.3em 2em 0.3em 0.3em;
+  margin: 0px 10px;
+
+  border: 1px solid #eee;
+  font: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 15px top 1em, right 10px top 1em;
+  background-size: 5px 5px, 5px 5px;
+}
+select:focus {
+    outline:none !important;
+}
+.input-search {
+  /*border:1px solid red;*/
+  min-height: 34px;
+}
+
+/*/////////////search/////////////////  /*/
+
+
+.recipe {
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  @include box-shadow;
+  .image_wrapper {
+    min-width: 100%;
+    max-height: 200px;
+    min-height: 200px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden; // to hide the image when grow
+  }
+  img {
+    width: 100%;
+    min-height: 200px;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    &:hover {
+      transform: scale(1.075);
+    }
+  }
+  h2 {
+    padding: 15px 5%;
+    margin: 0;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.5;
+    a {
+      color: $red;
+    }
+  }
+  h6 {
+    margin: 10px;
+  }
+}
+.main-content-recipe {
+  padding: 0px 20px;
+  min-height: 500px;
+}
+.mobile-buttons {
+    margin: 0px;
+  }
+.field {
+  margin-bottom: 20px;
+}
+.field label {
+  font-weight: bold;
+}
+
+textarea {
+  height: 120px;
+
+}
+.form-button  {
+  float: right;
+  margin-top: 20px;
+}
+.card {
+  margin: 5px 0px;
+}
+
+/*//////////////radio buttons////////////////*/
+
+.my_radio_wrapper{
+  display: inline-flex;
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  padding: 20px 5px;
+  box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+}
+.my_radio_wrapper .option{
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  max-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+.my_radio_wrapper .option .dot{
+  height: 1rem;
+  width: 1rem;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+}
+
+.my_radio_wrapper .option .dot::before{
+  position: absolute;
+  content: "";
+  top: 0.15rem;
+  left: 0.15rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: #0069d9;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+input[type="radio"]{
+  display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2,
+#option-3:checked:checked ~ .option-3{
+  border-color: #0069d9;
+  background: #0069d9;
+}
+#option-1:checked:checked ~ .option-1 .dot,
+#option-2:checked:checked ~ .option-2 .dot,
+#option-3:checked:checked ~ .option-3 .dot{
+  background: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before,
+#option-3:checked:checked ~ .option-3 .dot::before{
+  opacity: 1;
+  transform: scale(1);
+}
+.my_radio_wrapper .option span{
+  font-size: 0.8rem;
+  color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span,
+#option-3:checked:checked ~ .option-3 span{
+  color: #fff;
+}
+/*//////////////radio buttons////////////////*/
+
+#recipe_top {
+  margin-bottom: 50px;
+}
+
+#recipe_info, #ingredients, #directions {
+  background: #fff;
+  @include box-shadow;
+  min-height: 90px;
+  border-right: 5px;
+  padding:1em 4%;
+}
+.recipe_image {
+  max-width: 100%;
+  border-right: 5px;
+  @include box-shadow;
+}
+
+#recipe_info {
+  min-height: 180px;
+  h1 {
+    font-size: 22px;
+    font-weight: bold;
+    color: $red;
+    a {
+      color: $red;
+      text-decoration: none;
+    }
+  }
+
+  .description {
+    color: #BABABA;
+    font-size: 20px;
+  }
+  img {
+  float:right;
+  margin: 0 0 10px 20px;
+  max-height: 300px;
+  }
+}
+#ingredients, #directions {
+  margin-bottom: 50px;
+  ul, ol {
+    padding-left: 18px;
+    li {
+      padding:1em 0;
+      border-bottom: 1px solid #EAEAEA;
+    }
+  }
+}
+
+footer {
+  margin-top: 15px;
+}
+
+/*//////////////////////- Login page////////////////////////*/
+.gradient-form {
+  .gradient-custom-2 img {
+    margin: -60% 0 40% 20%;
+    /*margin-left: 20%;*/
+    width:300px;
+  }
+  
+}
+.gradient-custom-2 {
+/* fallback for old browsers */
+background: #fccb90;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+
+@media (min-width: 768px) {
+.gradient-form {
+/*height: 100vh !important;*/
+}
+}
+@media (min-width: 769px) {
+.gradient-custom-2 {
+border-top-right-radius: .3rem;
+border-bottom-right-radius: .3rem;
+}
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+.gradient-form {
+    .gradient-custom-2 img {
+      margin: 10% 0 10% 25%;
+      /*margin-left: 20%;*/
+      width:300px;
+      
+    }
+    
+  }
+}
+
+
+
+/*//////////////////////- Login page////////////////////////*/
+
+
+
+
+
+
+
+/*//////////////////////////////////////////////*/
+/*//////////////////////- Mobile- ////////////////////////*/
+
+@media only screen and (max-width: 767px) {
+  .mobile-select {
+    margin: 10px 0 10px -8px;
+  }
+  .select {
+    width: 100%;
+  }
+  .right-select {
+    margin: 10px 0 10px -8px;
+  }
+  .mobile-buttons {
+    margin: 5px 5px;
+  }
+  .mobile-search {
+    width: 100%;
+    margin: 5px 0;
+  }
+  .main-content {
+    padding: 0px;
+    /*border: 1px solid red;*/
+  }
+  .main-content-recipe {
+    width: 100%;
+    width: 100vw;
+    padding: 0px;
+    margin: 0 0 0 0px;
+  }
+  
+  .direction-image img{
+    width: 100%;
+    border-color: 2px solid red;
+  }
+
+  .margin-left {
+    margin-left: 8px;
+  }
+
+  .gradient-form {
+    .gradient-custom-2 img {
+      margin: 10% 0 10% 25%;
+      /*margin-left: 20%;*/
+      width:300px;
+    }
+    
+  }
+  
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

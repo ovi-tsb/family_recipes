@@ -1,15 +1,26 @@
+<div class="home-continer">
+	<% if user_signed_in?  %>
 
-<% if user_signed_in?  %>
+		
+		<h3>Hello - <%= current_user.name %>
+			<br> Your email is:	<%= current_user.email %></h3>
+		<h3>Your ID is: <%= current_user.id %></h3>
+		<% if current_user.friends.any? %>
+			<h3 style="display: inline;">You have <%= current_user.friends.count %> friends.</h3>
+		<% end %>
+	<% end %>
+	<div class="inside-home">
+		<div class="well">
+			<h3>Welcome</h3>
+			<p>Here we can save our loved recipes and let next generation to continue our traditions</p>
+			<p>Just Login or Sign In and you can start share your recipes with your family.</p>
 
-	<%= link_to "Logout", destroy_user_session_path, method: :delete %>
-	| <%= link_to "Setari", edit_user_registration_path(current_user) %>
-	<h3>You are logged as: <%= current_user.first_name %> <%= current_user.last_name %>
-		<br> Your email is:	<%= current_user.email %></h3>
-	<h3>ID: <%= current_user.id %></h3>
-	<br>
-	<%= link_to "My Page", users_path(current_user) %>
+			  <%= link_to "Login", new_user_session_path, class: "nav-link"  %>
+			
+			  <%= link_to "Sign In", new_user_registration_path, class: "nav-link"  %>
+			
+		</div>
+	</div>
+	
+</div>
 
-
-<% else %>
-	<%= link_to "Login", new_user_session_path %>
-<% end %>

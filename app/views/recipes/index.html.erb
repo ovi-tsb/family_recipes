@@ -1,43 +1,59 @@
-<h1>Index pentru retete</h1>
-<hr>
-<%= form_tag recipes_path, :method => 'get' do %>
+<div class="main_content">
+	<h1>Index pentru retete</h1>
+	<hr>
+	<%= form_tag recipes_path, :method => 'get' do %>
 
-	<p>
-		<%= text_field_tag :search, params[:search] %>
+		<div class="row">
+			<div class="col-sm-12 col-md-3 col-lg-3">
+				<%= text_field_tag :search, params[:search], class:'input-search  mobile-search', placeholder: "Search" %>
+			</div>
+			<!-- <div class="col-sm-12 col-md-3 col-lg-3">
+				<%#= text_field_tag :searchIngredients, params[:searchIngredients], class:'input-search  mobile-search', placeholder: "Ingredient" %>
+			</div> -->
+			<div class="col-sm-6 col-md-2 col-lg-2 mobile-select">
+				<% friend = current_user.friends.map{|f| [f.name]} << current_user.name %>
+				<%= select_tag :friend_filter, options_for_select(friend), {:include_blank => 'Select Friend',:id => 'standard-select', class: 'select'} %>
+			</div>
+			<div class="col-sm-6 col-md-2 col-lg-2  right-select">
+				<% category = Category.all.order(name: :asc).map{|f| [f.name.capitalize]} %>
+				<%= select_tag :category_filter, options_for_select(category), {:include_blank => 'Category',:id => 'standard-select', class: 'select'} %>
+			</div>
+		<!-- </div> -->
+		<!-- <div class="row">	 -->
+			<div class="col-sm-12 col-md-2 col-lg-1 mobile-buttons d-grid gap-2 d-md-block">
+				<%= submit_tag "Search", :name => nil, class:'btn btn-primary ', id:'search_submit' %>
+			</div>
+			<div class="col-sm-12 col-md-2 col-lg-1 mobile-buttons d-grid gap-2 d-md-block">
+				<%= button_tag 'CLEAR', id: 'clear_form_button', class:'btn btn-info' %>
+			</div>
+		</div>
 
-		<% friend = current_user.friends.map{|f| [f.name]} << current_user.name %>
-		<%= select_tag :friend_filter, options_for_select(friend), {:include_blank => 'Select'}%>
+		<script>
+		    function clickSubmit() {
+		        $("#search_submit").trigger("click");
+		    }
+		</script>
+		<script type='text/javascript'>
+			$(document).ready(function () {
 
-	</p>
-	<p>
-		<%= submit_tag "Search", :name => nil, class:'btn btn-dark', id:'search_submit' %>
-		<%= button_tag 'CLEAR', id: 'clear_form_button' %>
-	</p>
-
-	<script>
-	    function clickSubmit() {
-	        $("#search_submit").trigger("click");
-	    }
-	</script>
-	<script type='text/javascript'>
-		$(document).ready(function () {
-
-			$("#clear_form_button").on("click", function() {
-			  $("#search").val("");
+				$("#clear_form_button").on("click", function() {
+				  $("#search").val("");
+				});
 			});
-		});
-	</script>
-<% end %>
+			$(document).ready(function () {
 
-<hr>
-<%= render 'recipes/list' %>
-<hr>
+				$("#clear_form_button").on("click", function() {
+				  $("#searchIngredients").val("");
+				});
+			});
+		</script>
+	<% end %>
 
-<% if user_signed_in? %>
-	<%= link_to "New Recipes", new_recipe_path, class: "btn btn-primary" %>
-	<%=link_to "Sign Out", destroy_user_session_path,   method: :delete %>
+	<hr>
+	<%= render 'recipes/list' %>
+	<hr>
 
-<% else %>
-	<%= link_to "Sing Up", new_user_registration_path %>
-	<%= link_to "Sing In", new_user_session_path %>
-<% end %>
+	<% if user_signed_in? %>
+		<%= link_to "New Recipes", new_recipe_path, class: "btn btn-primary" %>
+	<% end %>
+</div>

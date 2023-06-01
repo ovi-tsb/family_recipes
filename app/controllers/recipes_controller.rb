@@ -4,11 +4,9 @@ class RecipesController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
-		# @recipe = Recipe.all.order("created_at DESC")
-		# @recipe = Recipe.recipes_by(current_user)
-		# @recipe = Recipe.search(params[:search])
-
-		ids = current_user.friends.map{|f| f.id} << current_user.id
+		
+		ids = current_user.friends.map{|f| f.id} << current_user.id 
+		
 
 		if params[:friend_filter].present? 
             # @recipe = Recipe.joins(:user).where("user.name ILIKE?", "%#{params[:friend_filter]}%".downcase)
@@ -16,9 +14,14 @@ class RecipesController < ApplicationController
         	# @recipe = Recipe.joins(:user).where('title ILIKE ?  OR first_name ILIKE ? ',  "%#{search}%", "%#{search}%")
         elsif params[:search].present?
         	@recipe = Recipe.search(params[:search])
+        elsif params[:searchIngredients].present?
+        	@recipe = Recipe.searchIngredients(params[:searchIngredients])
+        elsif params[:category_filter].present? 
+        	@recipe = Recipe.searchxx(params[:category_filter])
         else    
-            @recipe = Recipe.where(user_id: ids)
+           @recipe = Recipe.where(user_id: ids)
         end
+
 	end
 
 	def new
@@ -55,22 +58,22 @@ class RecipesController < ApplicationController
     	redirect_to recipes_path, notice:"Succesfully deleted recipe"
 	end
 
-	def search
-		query = params[:search]
-		results = Recipe.joins(:user).where('title ILIKE ?  OR first_name ILIKE ? ',  "%#{search}%", "%#{search}%")
-		if params[:filter]  == 'Select'
-		 	Recipe.all
-		else 
-			symbol = params[:filter]
-			@recipe = results.where(Recipe.user.first_name = symbol)
-		end
-	end
+	# def search
+	# 	query = params[:search]
+	# 	results = Recipe.joins(:user).where('title ILIKE ? OR ingredients.name ILIKE ? OR first_name ILIKE ? ',  "%#{search}%",  "%#{search}%", "%#{search}%")
+	# 	if params[:filter]  == 'Select'
+	# 	 	Recipe.all
+	# 	else 
+	# 		symbol = params[:filter]
+	# 		@recipe = results.where(Recipe.user.first_name = symbol)
+	# 	end
+	# end
 
 
 	private
 
 	def recipe_params
-		params.require(:recipe).permit(:title, :description, :image, ingredients_attributes: [:id, :name, :_destroy], directions_attributes: [:id, :step, :image, :_destroy])
+		params.require(:recipe).permit(:title, :description, :image, :status, :category_id, ingredients_attributes: [:id, :name, :_destroy], directions_attributes: [:id, :step, :image, :_destroy])
 	end
 
 	def find_recipe

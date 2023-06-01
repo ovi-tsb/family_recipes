@@ -15,28 +15,33 @@
 		</div>
 	<% end %>
 	<div class="panel-body">
-		<div class="row">
+		
+		<!-- ############# radio Buttons################ -->
+
+		<!-- <div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="friend_group">Status</label>
 					<div class="field">
-						<%= f.label :status, "Friend" %>
-						<%= f.radio_button :status, 'friend' %>
+						<%#= f.label :status, "Friend" %>
+						<%#= f.radio_button :status, 'friend' %>
 
-						<%= f.label :status, 'Family' %>
-						<%= f.radio_button :status, 'family' %>
+						<%#= f.label :status, 'Family' %>
+						<%#= f.radio_button :status, 'family' %>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
+		<!-- ############# radio Buttons################ -->
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="friend_group">Group</label>
-					<%= select_tag :group_id, options_for_select(Group.pluck(:name, :id), @invitation.group(current_user)&.id), include_blank: true %>
+					<label for="friend_group">Select group</label>
+					<%= select_tag :group_id, options_for_select(Group.pluck(:name, :id), @invitation.group(current_user)&.id) %>
 				</div>
 			</div>
 		</div>
-		<%= f.submit "Save invitation", class: "btn btn-primary" %>
+		<br>
+		<%= f.submit "Save", class: "btn btn-primary" %>
 	</div>
 <% end %>

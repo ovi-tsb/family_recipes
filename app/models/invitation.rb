@@ -3,7 +3,7 @@
 class Invitation < ApplicationRecord
   belongs_to :user
   belongs_to :friend, class_name: 'User'
-
+ 
   enum status: {  friend: 0,
                   family: 1 }
 
@@ -35,5 +35,15 @@ class Invitation < ApplicationRecord
       user.membership_with(friend)
     end
   end
+
+  
+
+  # def set_group=(value)
+  #   if value.blank?
+  #     write_attribute :friend.membership_with(user), 'default school'
+  #   else
+  #     write_attribute :friend.membership_with(user), value
+  #   end
+  # end
   ######################
 end

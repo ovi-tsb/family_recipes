@@ -3,6 +3,8 @@
 class InvitationsController < ApplicationController
   before_action :find_invitation, only: %i[show edit update destroy]
 
+ 
+
   def index; end
 
   def show
@@ -18,7 +20,9 @@ class InvitationsController < ApplicationController
     id2 = params[:ids][:id2]
     @invitation = Invitation.new(user_id: id1, friend_id: id2, status: params[:status])
     @invitation.save
-    redirect_to users_path(current_user.id)
+    # redirect_to users_path(current_user.id)
+
+    redirect_to invitation_path(@invitation)
   end
 
   def destroy
@@ -30,7 +34,8 @@ class InvitationsController < ApplicationController
   def update
     ### no error to accept invitation
     ### error to accept invitation
-    @invitation.update!(invitation_params)
+    
+    # @invitation.update!(invitation_params)
 
     # current user is the invitee, so he can confirm the invitation
     @invitation.update(confirmed: true) if @invitation.friend == current_user
@@ -52,4 +57,7 @@ class InvitationsController < ApplicationController
   def find_invitation
     @invitation = Invitation.find(params[:id])
   end
+
+  
+
 end

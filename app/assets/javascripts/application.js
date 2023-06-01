@@ -11,10 +11,14 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require jquery 
+
+//= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require filterrific/filterrific-jquery
 //= require activestorage
 //= require cocoon
 //= require turbolinks
 //= require_tree .
+
+
