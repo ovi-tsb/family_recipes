@@ -73,6 +73,9 @@ class Recipe < ApplicationRecord
 	  [@user.first_name, @user.last_name].select(&:present?).join(' ').titleize
 	end
 
+	def self.by_position
+		order("position ASC")
+	end
 
 
 end

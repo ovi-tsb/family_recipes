@@ -8,7 +8,7 @@
       
 
        <% if recipe.user_id == current_user.id %>
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12" >
           <div class="recipe">
             <div class="image_wrapper">
               <% if recipe.image.attached? %>
@@ -54,8 +54,9 @@
 
          <%# if friend.membership_with(@u).present? %>
          <% if friend.membership_with(@u).name == recipe.status && friend.name == current_user.name || friend.membership_with(@u).name == 'family' && recipe.status != 'only_me' && friend.name == current_user.name %>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <div class="recipe">
+            <div class="col-md-4 col-sm-6 col-xs-12 sort-card"   data-id="<%= recipe.id %>
+              ">
+              <div class="recipe" >
                 <div class="image_wrapper">
                   <% if recipe.image.attached? %>
                                   <%= link_to recipe do %>

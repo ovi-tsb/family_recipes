@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'directions/sort'
   get 'invitations/create'
   get 'invitations/destroy'
   get 'invitations/update'
@@ -9,7 +10,19 @@ Rails.application.routes.draw do
 
   resources :invitations
   resources :friendconnects
-  resources :recipes
+  # resources :recipes
+
+  resources :recipes do
+    # resources :directions do
+      put :sort, on: :collection
+    # end
+  end
+
+  resources :directions do
+    put :sort, on: :collection
+  end
+
+
   # resources :groups
   # resources :users
   # get 'users/:id' => 'users#show'

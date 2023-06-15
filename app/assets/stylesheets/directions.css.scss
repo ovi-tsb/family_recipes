@@ -1,0 +1,22 @@
+// Place all the styles related to the Directions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.delete-button {
+	margin-top: 7px;
+}
+.direction-group {
+	border: 1px solid lightgrey;
+	margin: 5px 0px;
+	padding: 8px;
+	border-radius: 10px;
+	background-color: #ECECEC;
+	
+}
+.direction-group textarea {
+	text-transform: capitalize;
+}
+.small-text {
+	font-size: 0.7em;
+	font-family: Courier New, monospace;
+	font-weight: 700;
+}

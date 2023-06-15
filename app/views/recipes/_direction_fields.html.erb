@@ -1,11 +1,22 @@
 <div class="form-inline clearfix">
+	
+	<i class="small-text">Drag and drop after update.</i>
 	<div class="nested-fields">
-		<%= f.input :step, input_html: { class: "form-input form-control" } %>
-		
-		<div class="field">
-			<%= f.label :image %>
-			<%= f.file_field :image, type: 'file', id: "uformFileDisabled", class: 'form-control' %>
+		<div class="direction-group">
+			<div>
+				<%= f.input :step, input_html: { class: "form-input form-control" }, label: false %>  
+			</div>
+			<div class="row">
+				<div class="field col-sm-10 col-md-10">
+					<%= f.label :image %>
+					<%= f.file_field :image, type: 'file', id: "uformFileDisabled", class: 'form-control' %>
+				</div>
+				<div class="field col-sm-2 col-md-2 delete-button">
+					<%= link_to_remove_association "Delete", f, class: "form-button btn btn-danger btn-sm" %>
+				</div>
+			</div>
 		</div>
-		<%= link_to_remove_association "Delete", f, class: "form-button btn btn-danger btn-sm" %>
+		
+		
 	</div>
 </div>

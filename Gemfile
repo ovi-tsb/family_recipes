@@ -33,6 +33,7 @@ gem 'bootstrap', '~> 5.2', '>= 5.2.3'
 
 gem 'cocoon', '~> 1.2', '>= 1.2.15'
 gem 'filterrific', '~> 5.2', '>= 5.2.3'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 
 
 group :development, :test do

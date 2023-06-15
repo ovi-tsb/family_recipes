@@ -1,6 +1,14 @@
 @import "bootstrap";
 @import 'home';
+@import 'directions';
+@import "jquery-ui";
 
+.directions {
+  /*border: 1px solid red;*/
+  ul {
+    list-style-type: none;
+  }
+}
 
 .directions img{
 	width: 200px;

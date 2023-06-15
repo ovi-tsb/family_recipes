@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_29_210937) do
+ActiveRecord::Schema.define(version: 2023_06_14_204841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2023_05_29_210937) do
     t.bigint "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position"
     t.index ["recipe_id"], name: "index_directions_on_recipe_id"
   end
 
@@ -111,6 +112,7 @@ ActiveRecord::Schema.define(version: 2023_05_29_210937) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
     t.integer "category_id"
+    t.integer "position"
   end
 
   create_table "users", force: :cascade do |t|

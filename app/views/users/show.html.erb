@@ -121,7 +121,7 @@
 					<tr>	
 							<td><%= indexplusone %></td>
 							<td><%= invitation.user.name %></td>
-							<td><%= invitation.user.country %>,<%= invitation.user.city %></td>
+							<td><%= invitation.user.country.titleize %>,<%= invitation.user.city.titleize %></td>
 							
 							<td><%= link_to 'Accept Invitation', invitation_path(invitation), class: "btn btn-primary" %></td> 
 							<td><%= link_to 'Reject Invitation', invitation_path(invitation), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>

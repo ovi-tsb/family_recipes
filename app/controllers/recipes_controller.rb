@@ -24,6 +24,16 @@ class RecipesController < ApplicationController
 
 	end
 
+	# def sort
+	# 	params[:order].each do |key, value|
+	# 		# Recipe.direction.find(value[:id]).update(position: value[:position])
+	# 		Recipe.find(value[:id]).update(position: value[:position])
+	# 	end
+
+	# 	render nothing: true
+	# end
+
+
 	def new
 		@recipe = current_user.recipes.build
 	end
