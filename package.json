@@ -3,3 +3,6 @@
   "private": true,
   "dependencies": {}
 }
+"engines": {
+    "node": "19.0.0"
+},
