@@ -1,6 +1,6 @@
 {
   "name": "Family_recipes",
-  "private": true,
+  "private": false,
   "dependencies": {}
 }
 
