@@ -213,6 +213,9 @@ textarea {
 .card {
   margin: 5px 0px;
 }
+.sort-card {
+  padding: 8px;
+}
 
 /*//////////////radio buttons////////////////*/
 
@@ -436,12 +439,34 @@ border-bottom-right-radius: .3rem;
   
   .direction-image img{
     width: 100%;
+    max-width: 100%;
     border-color: 2px solid red;
   }
 
   .margin-left {
     margin-left: 8px;
   }
+  .directions {
+      
+     padding: 0px;
+      margin-left: -10px;
+      /*border: 1px solid red;*/
+        .sortable {
+          width: 100%;
+          width: 100vw;
+          max-width: 100%;
+          margin-left: -5px;
+          /*border: 1px solid green;*/
+        }
+    } 
+  .sortable {
+    width: 100%;
+    width: 100vw;
+    li {
+      margin-left: 0;
+    }
+  }
+   
 
   .gradient-form {
     .gradient-custom-2 img {

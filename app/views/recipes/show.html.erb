@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="col-sm-12 col-md-6 col-lg-6">
-			<div class="card card-body bg-light">
+			<div class="card card-body">
 				<div id="directions" class="directions">
 					<h2>Directions</h2>
 					<ul>
@@ -45,7 +45,7 @@
 						<% @recipe.directions.by_position.each.with_index do |direction, index|  
 							indexplusone = index+1 %>
 						
-							<span class="card sort-card" data-id="<%= direction.id %>
+							<div class="card sort-card" data-id="<%= direction.id %>
 							">
 								
 								<div class="col-sm-12 col-md-6">
@@ -60,7 +60,7 @@
 										</div>
 									<% end %>
 								</div>
-							</span>
+							</div>
 						
 						
 						<% end %>
