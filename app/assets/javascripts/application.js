@@ -16,7 +16,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap
-//= require filterrific/filterrific-jquery
 //= require activestorage
 //= require cocoon
 //= require html.sortable
