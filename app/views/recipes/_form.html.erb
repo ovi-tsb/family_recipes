@@ -35,7 +35,9 @@
 							<%= f.label :image %>
 							<%= f.file_field :image, type: 'file', id: "uformFileDisabled", class: 'form-control'  %>
 						</div>
-						<%= image_tag f.object.image, class: "edit-form-image" if f.object.image.present? %>
+						<% if @recipe.image.attached? %>
+							<%= image_tag f.object.image, class: "edit-form-image" if f.object.image.present? %>
+						<% end %>
 					
 					
 				</div>
