@@ -30,10 +30,14 @@
 					</div>
 				</div>	
 				<div class="row">
-					<div class="field">
-						<%= f.label :image %>
-						<%= f.file_field :image, type: 'file', id: "uformFileDisabled", class: 'form-control'  %>
-					</div>
+						<div class="field">
+						
+							<%= f.label :image %>
+							<%= f.file_field :image, type: 'file', id: "uformFileDisabled", class: 'form-control'  %>
+						</div>
+						<%= image_tag f.object.image, class: "edit-form-image" if f.object.image.present? %>
+					
+					
 				</div>
 			</div>
 			<div class="col-md-6">

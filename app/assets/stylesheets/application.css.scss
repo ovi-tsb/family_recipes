@@ -314,6 +314,9 @@ input[type="radio"]{
   border-right: 5px;
   @include box-shadow;
 }
+.edit-form-image {
+  max-width: 140px;
+}
 
 #recipe_info {
   min-height: 180px;
