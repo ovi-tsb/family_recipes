@@ -35,6 +35,7 @@ class Invitation < ApplicationRecord
       user.membership_with(friend)
     end
   end
+  
 
   
 

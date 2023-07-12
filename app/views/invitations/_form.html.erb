@@ -16,32 +16,21 @@
 	<% end %>
 	<div class="panel-body">
 		
-		<!-- ############# radio Buttons################ -->
-
-		<!-- <div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-					<label for="friend_group">Status</label>
-					<div class="field">
-						<%#= f.label :status, "Friend" %>
-						<%#= f.radio_button :status, 'friend' %>
-
-						<%#= f.label :status, 'Family' %>
-						<%#= f.radio_button :status, 'family' %>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<!-- ############# radio Buttons################ -->
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="friend_group">Select group</label>
-					<%= select_tag :group_id, options_for_select(Group.pluck(:name, :id), @invitation.group(current_user)&.id) %>
+					<label for="friend_group"><%= t '.select_group' %></label>
+					
+					
+					<% group = Group.all.order(name: :asc).map{|f| [f.translated_name.capitalize, f.id]} %>
+					<%#= select_tag :category_filter, options_for_select(category), {include_blank: t('recipes.form.select_category'),:id => 'standard-select', class: 'select'} %>
+
+					<%= select_tag :group_id, options_for_select(group, @invitation.group(current_user)&.id), class: "options_for_select" %>
+					<%#= select_tag :group_id, options_for_select(Group.pluck(:name, :id), @invitation.group(current_user)&.id), class: "options_for_select" %>
 				</div>
 			</div>
 		</div>
 		<br>
-		<%= f.submit "Save", class: "btn btn-primary" %>
+		<%= f.submit t('invitations.form.save'), class: "btn btn-primary" %>
 	</div>
 <% end %>

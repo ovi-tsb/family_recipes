@@ -1,6 +1,6 @@
 <div class="form-inline clearfix">
 	
-	<i class="small-text">Drag and drop after update.</i>
+	<i class="small-text"><%= t 'recipes.drag_drop' %></i>
 	<div class="nested-fields">
 		<div class="direction-group">
 			<div>
@@ -8,7 +8,8 @@
 			</div>
 			<div class="row">
 				<div class="field col-sm-10 col-md-10">
-					<%= f.label :image %>
+					<%#= f.label :image %>
+					<%= f.label t('recipes.edit.labels.image') %>
 					<%= f.file_field :image, type: 'file', id: "uformFileDisabled", class: 'form-control' %>
 				</div>
 				<% if f.object.image.attached? %>
@@ -18,7 +19,8 @@
 					</div>
 				<% end %>
 				<div class="field col-sm-2 col-md-2 delete-button">
-					<%= link_to_remove_association "Delete", f, class: "form-button btn btn-danger btn-sm" %>
+					<%= link_to_remove_association t('recipes.remove_ingredient'), f, class: "form-button btn btn-danger btn-sm" %>
+
 				</div>
 			</div>
 		</div>

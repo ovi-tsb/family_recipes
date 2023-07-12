@@ -5,26 +5,24 @@
 
 		<div class="row">
 			<div class="col-sm-12 col-md-3 col-lg-3">
-				<%= text_field_tag :search, params[:search], class:'input-search  mobile-search', placeholder: "Search" %>
+				<%= text_field_tag :search, params[:search], class:'input-search  mobile-search', :placeholder => t('recipes.form.placeholder.search')  %>
 			</div>
-			<!-- <div class="col-sm-12 col-md-3 col-lg-3">
-				<%#= text_field_tag :searchIngredients, params[:searchIngredients], class:'input-search  mobile-search', placeholder: "Ingredient" %>
-			</div> -->
+			
 			<div class="col-sm-6 col-md-2 col-lg-2 mobile-select">
 				<% friend = current_user.friends.map{|f| [f.name]} << current_user.name %>
-				<%= select_tag :friend_filter, options_for_select(friend), {:include_blank => 'Select Friend',:id => 'standard-select', class: 'select'} %>
+				<%= select_tag :friend_filter, options_for_select(friend), {include_blank: t('recipes.form.select_friend'),:id => 'standard-select', class: 'select'} %>
 			</div>
 			<div class="col-sm-6 col-md-2 col-lg-2  right-select">
-				<% category = Category.all.order(name: :asc).map{|f| [f.name.capitalize]} %>
-				<%= select_tag :category_filter, options_for_select(category), {:include_blank => 'Category',:id => 'standard-select', class: 'select'} %>
+				<% category = Category.all.order(name: :asc).map{|f| [f.translated_name.capitalize]} %>
+				<%= select_tag :category_filter, options_for_select(category), {include_blank: t('recipes.form.select_category'),:id => 'standard-select', class: 'select'} %>
 			</div>
 		<!-- </div> -->
 		<!-- <div class="row">	 -->
 			<div class="col-sm-12 col-md-2 col-lg-1 mobile-buttons d-grid gap-2 d-md-block">
-				<%= submit_tag "Search", :name => nil, class:'btn btn-primary ', id:'search_submit' %>
+				<%= submit_tag t('recipes.form.search'), :name => nil, class:'btn btn-primary ', id:'search_submit' %>
 			</div>
 			<div class="col-sm-12 col-md-2 col-lg-1 mobile-buttons d-grid gap-2 d-md-block">
-				<%= button_tag 'CLEAR', id: 'clear_form_button', class:'btn btn-info' %>
+				<%= button_tag t('recipes.form.clear'), id: 'clear_form_button', class:'btn btn-info' %>
 			</div>
 		</div>
 
@@ -54,6 +52,7 @@
 	<hr>
 
 	<% if user_signed_in? %>
-		<%= link_to "New Recipes", new_recipe_path, class: "btn btn-primary" %>
+		<%#= link_to "New Recipes", new_recipe_path, class: "btn btn-primary" %>
+		<%= button_tag t('recipes.form.new_recipe'), :name => nil, class:'btn btn-primary ' %>
 	<% end %>
 </div>

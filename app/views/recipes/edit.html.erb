@@ -1,6 +1,6 @@
 <div class="main_content">
-	<h1>Edit Recipes</h1>
+	<h1><%= t '.edit_recipes' %></h1>
 	<%= render 'form' %>
 	<br>
-	<%= link_to "Back", recipes_path, class: "btn btn-secondary" %>
+	<%= link_to  t('global.buttons.back'), recipes_path, class: "btn btn-secondary" %>
 </div>

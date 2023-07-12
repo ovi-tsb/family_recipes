@@ -1,43 +1,59 @@
 Rails.application.routes.draw do
-  get 'directions/sort'
-  get 'invitations/create'
-  get 'invitations/destroy'
-  get 'invitations/update'
-  get 'invitations/edit'
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+  
 
-  # devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy'
-  # end
+    get 'home/index'
 
-  resources :invitations
-  resources :friendconnects
-  # resources :recipes
+    get 'directions/sort'
+    get 'invitations/create'
+    get 'invitations/destroy'
+    get 'invitations/update'
+    get 'invitations/edit'
 
-  resources :recipes do
-    # resources :directions do
+    # get 'recipes/index'
+    # get 'recipes/:id' => 'recipes#index', as: :recipes
+
+    # resources :recipes 
+    resources :invitations
+    resources :friendconnects
+
+    resources :directions do
       put :sort, on: :collection
-    # end
+    end
+    # devise_for :users
+    
+    root to: 'home#index'
+
+
+    
+    devise_for :users
+    get 'users/:id' => 'users#show', as: :users
+    
+    resources :recipes
   end
-
-  resources :directions do
-    put :sort, on: :collection
-  end
-
-
-  # resources :groups
-  # resources :users
-  # get 'users/:id' => 'users#show'
-  # get 'users/index'
-  get 'home/index'
-  # devise_for :users
-
-  # devise_for :users do
-  #   get '/users/sign_out' => 'devise/sessions#destroy'
-  #   get 'users/:id' => 'users#show', as: :user
-  # end
-
-  devise_for :users
-  get 'users/:id' => 'users#show', as: :users
-  # get 'users/:id' => 'users#index', as: :users
-
-  root to: 'home#index'
+  # resources :recipes
 end
+# http://localhost:3000/15/recipes
+# http://localhost:3000/ro/recipes
+# http://localhost:3000/ro/recipes?utf8=✓&search=&friend_filter=&category_filter=Desert
+# http://localhost:3000/recipes?locale=ro
+# http://localhost:3000/recipes?utf8=✓&search=&friend_filter=&category_filter=Desert
+
+
+
+
+# http://localhost:3000/ro/users/15
+# http://localhost:3000/recipes.15?locale=ro
+# http://localhost:3000/en/recipes/index
+# http://localhost:3000/en/users/15
+# http://localhost:3000/recipes.15?locale=en
+
+# http://localhost:3000/ro/recipes/index
+# http://localhost:3000/recipes?utf8=✓&search=&friend_filter=&category_filter=Desert
+
+# http://localhost:3000/recipes?utf8=✓&search=&friend_filter=&category_filter=Desert
+# http://localhost:3000/ro/recipes?utf8=✓&search=&friend_filter=&category_filter=Desert
+
+
+
+

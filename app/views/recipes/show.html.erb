@@ -13,7 +13,9 @@
 		<div class="col-sm-12 col-md-7 col-lg-7">
 			<div class="card card-body bg-light">
 				<h3><%= @recipe.title.capitalize %></h3>
-				<u><span>Category: <%= @recipe.category.name if @recipe.category.name %></span></u>
+				<i><span><%= label_tag t('recipes.edit.labels.category') %> - 
+						 <%= @recipe.category.translated_name.capitalize if @recipe.category.name %></span></i>
+						 
 				<p><%= @recipe.description %></p>
 				<h6><i>By: <%= @recipe.user.name %> -  Created: <%= @recipe.created_at.strftime('%B-%d-%Y') %></i></h6>
 			</div>
@@ -23,7 +25,7 @@
 		<div class="col-sm-12 col-md-6 col-lg-6">
 			<div class="card card-body bg-light">
 				<div id="ingredient">
-					<h2>Ingredient</h2>
+					<h2><%= t 'recipes.ingredients' %></h2>
 					<ul>
 						<% @recipe.ingredients.each do |ingredient|  %>
 						<li>
@@ -37,7 +39,7 @@
 		<div class="col-sm-12 col-md-6 col-lg-6">
 			<div class="card card-body">
 				<div id="directions" class="directions">
-					<h2>Directions</h2>
+					<h2><%= t 'recipes.directions' %></h2>
 					<ul>
 						<!-- <li> -->
 						<li class="<%= "sortable" if current_user == @recipe.user %>">
@@ -74,10 +76,12 @@
 
 	<div class="row">
 		<div class="col-md-12 mobile-buttons">
-			<%= link_to "Back", recipes_path, class: "btn btn-secondary" %>
+			<%#= link_to "Back", recipes_path, class: "btn btn-secondary" %>
+			<%= link_to t('global.buttons.back'), recipes_path, class: "btn btn-secondary" %>
 			<% if user_signed_in? && current_user.id == @recipe.user_id%>
-				<%= link_to "Edit", edit_recipe_path, class: "btn btn-primary" %>
-				<%= link_to "Delete", recipe_path, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+				<%= link_to t('recipes.edit_recipe'), edit_recipe_path, class: "btn btn-primary" %>
+				<%= link_to t('recipes.remove_ingredient'), recipe_path, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+				
 			<% end %>
 		</div>
 	</div>

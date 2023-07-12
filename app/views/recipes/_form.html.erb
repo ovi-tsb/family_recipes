@@ -20,19 +20,21 @@
 			<div class="col-md-6">
 				<div class="row">
 					<div class="field col-md-7 col-7">
-						<%= label_tag  "Title" %>
+						<%= label_tag t('recipes.edit.labels.title') %>
 						<%= f.input :title, label: false, input_html: { class: 'form-control' } %>
 					</div>
 					<div class="field col-md-5 col-3">
-						<span style='margin-left:13px;'><%= label_tag  "Category"  %></span><br>
-						<%= f.collection_select :category_id, Category.all.order(name: :asc), :id, :name, {prompt: "-Choose-" }, input_html: {class: "dropdown-toggle" }, style: 'text-transform: capitalize;' %>
+						<span style='margin-left:13px;'><%= label_tag t('recipes.edit.labels.category') %></span><br>
+						<% category = Category.all.order(name: :asc).map{|f| [f.translated_name.capitalize]} %>
+						<%= select_tag :category_filter, options_for_select(category), {include_blank: t('recipes.form.select_category'),:id => 'standard-select', class: 'select'} %>
+						<%#= f.collection_select :category_id, Category.all.order(name: :asc), :id, :name, {prompt: "-Choose-" }, input_html: {class: "dropdown-toggle" }, style: 'text-transform: capitalize;' %>
 						<br>
 					</div>
 				</div>	
 				<div class="row">
 						<div class="field">
 						
-							<%= f.label :image %>
+							<%= f.label  t('recipes.edit.labels.image') %>
 							<%= f.file_field :image, type: 'file', id: "uformFileDisabled", class: 'form-control'  %>
 						</div>
 						<% if @recipe.image.attached? %>
@@ -44,7 +46,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class="field">
-					<%= label_tag  "Description" %>
+					<%= label_tag t('recipes.edit.labels.description')  %>
 					<%= f.input :description, label: false, input_html: { class: 'form-control' } %>
 				</div>
 			</div>
@@ -52,81 +54,67 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<h3>Ingredients</h3>
+				<h3><%= t 'recipes.ingredients' %></h3>
 				<div id="ingredients">
 					<%= f.simple_fields_for :ingredients do |ingredient| %>
 						<%= render "ingredient_fields", f: ingredient %>
 					<% end %>
 					<div class="links">
-						<%= link_to_add_association 'Add Ingredient', f, :ingredients, class: "btn btn-primary add-button" %>
+						<%= link_to_add_association t('recipes.add_ingredient'), f, :ingredients, class: "btn btn-primary add-button" %>
 					</div>
 					
 				</div>
 			</div>
 			<div class="col-md-6">
-				<h3>Directions</h3>
+				<h3><%= t 'recipes.directions' %></h3>
 				<div id="directions" class="sortable card" data-id="<%= @recipe.directions.ids %>
 							">
-				
-							
 						<%= f.simple_fields_for :directions do |direction| %>
 							<%= render "direction_fields", f: direction %>
 						<% end %>
 					
 					<div class="links">
-						<%= link_to_add_association 'Add Step', f, :directions, class: "btn btn-primary add-button" %>
+						<%= link_to_add_association  t('recipes.add_step'), f, :directions, class: "btn btn-primary add-button" %>
 						
 					</div>
-				<!-- </span> -->
-					
+				
 				</div>
 			</div>
 		</div>
 	</div>
 
 
-	<h3><label for="friend_group">Privacy: </label></h3>
+	<h3><label for="friend_group"><%= t 'recipes.privacy' %></label></h3>
 	<div class="field my_radio_wrapper">
 		
 				<%= f.radio_button :status, 'only_me', id: 'option-1' %>
 				<label for="option-1" class="option option-1">
 				  <div class="dot"></div>
-				  <span><%= f.label :status, "Just Me" %></span>
+				  <span><%= f.label :status, t('recipes.just_me') %></span>
 				</label>
 
 			
 				<%= f.radio_button :status, 'family', id: 'option-2' %>
 					<label for="option-2" class="option option-2">
 					  <div class="dot"></div>
-					   <span><%= f.label :status, 'Family' %></span>
+					   <span><%= f.label :status, t('recipes.family') %></span>
 					</label>
 			
 				<%= f.radio_button :status, 'friends', id: 'option-3' %>
 					<label for="option-3" class="option option-3">
 					  <div class="dot"></div>
-					   <span><%= f.label :status, 'Friends' %></span>
+					   <span><%= f.label :status, t('recipes.friends') %></span>
 					</label>
-		
-		
-		
-		
-		   
-		   
-		
 		<%#= f.radio_button :status, 'only_me' %>
 		<%#= f.label :status, "Just Me" %>
-
-		
 		<%#= f.radio_button :status, 'family' %>
 		<%#= f.label :status, 'Family' %>
-
-		
 		<%#= f.radio_button :status, 'friends' %>
 		<%#= f.label :status, 'Friends' %>
 	</div>
 	<br>
 
-	<%= f.button :submit, class: "btn btn-primary" %>
+	<%= f.submit t('recipes.save'), class: "btn btn-primary" %>
 	
 
 <% end %>

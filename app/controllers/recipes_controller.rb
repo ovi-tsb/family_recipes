@@ -19,20 +19,12 @@ class RecipesController < ApplicationController
         elsif params[:category_filter].present? 
         	@recipe = Recipe.searchxx(params[:category_filter])
         else    
-           @recipe = Recipe.where(user_id: ids)
+           	@recipe = Recipe.where(user_id: ids)
         end
 
 	end
 
-	# def sort
-	# 	params[:order].each do |key, value|
-	# 		# Recipe.direction.find(value[:id]).update(position: value[:position])
-	# 		Recipe.find(value[:id]).update(position: value[:position])
-	# 	end
-
-	# 	render nothing: true
-	# end
-
+	
 
 	def new
 		@recipe = current_user.recipes.build

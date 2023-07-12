@@ -20,7 +20,9 @@
 .image_wrapper img{
 	/*max-width: 200px;*/
 }
-
+.options_for_select {
+  text-transform: capitalize;
+}
 
 /*//////////////////*/
 
@@ -115,7 +117,28 @@ body {;
     font-weight: 400;
   }
 }
+.language {
+  list-style-type: none;
+  margin-top: 10px;
+  li {
+    margin-right:20px;
+    margin-top: 5px;
+    padding: 2px;
+    font-size: 1.2em;
+    font-weight: 600;
+    a {
+      /*margin-top: 40px;*/
 
+    }
+  }
+ 
+
+}
+.flag img{
+  width: 40px;
+  height: 25px;
+}
+/*/////////////   NAV  /////////////////  /*/
 /*/////////////search/////////////////  /*/
 
 

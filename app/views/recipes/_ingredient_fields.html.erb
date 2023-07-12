@@ -2,10 +2,12 @@
 	<div class="nested-fields direction-group">
 		<div class="row">
 			<div class="field col-sm-10 col-md-10">
-				<%= f.input :name, input_html: { class: "form-input form-control" } %>
+				<%= f.label t('recipes.ingredient_label')  %>
+				<%= f.input :name, input_html: { class: "form-input form-control" }, label: false %>
 			</div>
 			<div class="col-sm-2 col-md-2  delete-button">
-				<%= link_to_remove_association "Delete", f, class: "form-button btn btn-danger btn-sm" %>
+				<%= link_to_remove_association t('recipes.remove_ingredient'), f, class: "form-button btn btn-danger btn-sm" %>
+
 			</div>
 		</div>
 		

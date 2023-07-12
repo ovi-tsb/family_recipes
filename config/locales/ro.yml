@@ -1,0 +1,106 @@
+ro:
+  
+  global:
+    menu:
+      my_page: "Pagina mea"
+      recipes: "Retete"
+      settings: "Setari"
+      logout: "Iesire"
+      home: "Acasa"
+      login: "Logare"
+      sign_in: "Inregistrare"
+    buttons:
+      back: "Inapoi"
+  users:
+    show:
+      show_page_of: "Pagina de prezentare a lui: "
+      friends_search: "Cauta prieteni"
+      new_friends_list: "Prieteni noi"
+      forms:
+        submit: "Cauta"
+        clear: "Sterge"
+      table:
+        thead:
+          tr:
+            td:
+              name: "Nume"
+              country: "Tara"
+              city: "Oras"
+              action: "Actiune"
+              group: "Grup"
+              edit_group: "Editeaza grup"
+              from: "Din"
+        tbody:
+          invite: "Invita"
+          edit: "Editeaza"
+          delete: "Sterge"
+          accept_invitation: "Accepta invitatia"
+          reject_invitation: "Respinge invitatia"
+      friends_list: "Lista prieteni"
+      pending_invitations: "Invitatii in asteptare"
+      my_pending_invitations: "Invitatiile mele"
+    user_edit: "Editeaza"
+    password: "Parola noua"
+    password_confirmation: "Confirma parola"
+    characters_minimum: "caractere minim"
+    current_password: "Parola veche"
+    current_password_confirm: "este nevoie de vechea parola pentru a confirma schimbarea"
+    save_changes: "Salveaza"
+    cancel_my_account: "Sterge contul"
+    unhappy: "Nemultumit"
+    moto_title: "Suntem o familie mare de bucatari!"
+    moto: "Nimeni nu este perfect dar daca ne putem impartasi retetele cu prietenii si familia, putem imbunatati si incerca sa ne salvam traditiile peste generatii"
+  invitations:
+    edit:
+      edit_group: "Editeaza grup"
+    form:
+      select_group: "Selecteaza grup"
+      save: "Salveaza"
+  group:
+    family: "Familie"
+    friends: "Prieteni"
+  recipes:
+    form:
+      select_friend: "Selecteaza prieten"
+      select_category: "Categorie"
+      clear: "Reseteaza"
+      new_recipe: "Reteta noua"
+      search: "Cauta"
+      placeholder: 
+        search: "Cauta"
+    edit:
+      edit_recipes: "Editare reteta"
+      labels:
+        title: "Titlu"
+        category: "Categorie"
+        description: "Descriere"
+        image: "Poza"
+    ingredients: "Ingrediente"
+    add_ingredient: "Adauga Ingredient"
+    directions: "Instructiuni"
+    add_step: "Adauga Pas"
+    just_me: "Doar eu"
+    family: "Familia"
+    friends: "Prieteni"
+    save: "Salveaza"
+    ingredient_label: "Nume"
+    remove_ingredient: "Sterge"
+    drag_drop: "Trage si aseaza dupa salvare."
+    privacy: "Mod"
+    edit_recipe: "Editeaza"
+  category:
+    desert: "Desert"
+    main: "Felul Principal"
+    others: "Alte"
+    salads: "Salate"
+    soup: "Ciorbe"
+  footer:
+    family_recipes: "Retetele Familiei"
+    links: "Navigatie rapida"
+  home:
+    just_login: "Logheaza-te sau creaza cont si poti incepe sa imparti retetele tale cu familia si prietenii tai."
+
+
+
+
+

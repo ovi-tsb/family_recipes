@@ -5,4 +5,9 @@ class Group < ApplicationRecord
   def to_s
     name
   end
+
+  def translated_name
+    I18n.t(name, :scope => 'group')
+  end
+
 end

@@ -4,7 +4,6 @@
 
 
 <%= form_tag users_path, :method => 'get' do %>
-	
 	<p>
 		<%= text_field_tag :search, params[:search] %>
 		<%= submit_tag "Search", :name => nil %>
@@ -60,8 +59,8 @@
 			      
 			      	<%= User.find(invitation.user_id).email %>
 			      <%# end %>
-			      <%= link_to 'Accept Invitation', class: "btn btn-primary", invitation_path(invitation) %> - 
-			      <%= link_to 'Reject Invitation', class: "btn btn-danger", method: :delete, invitation_path(invitation) %>
+			      <%= link_to 'Accept Invitation', invitation_path(invitation), class: "btn btn-primary" %> - 
+			      <%= link_to 'Reject Invitation', invitation_path(invitation), method: :delete, class: "btn btn-danger" %>
 			    </li>
 			    <% end %>
 			  <% end %>

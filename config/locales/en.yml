@@ -1,33 +1,108 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  
+  global:
+    menu:
+      my_page: "My Page"
+      recipes: "Recipes"
+      settings: "Settings"
+      logout: "Logout"
+      home: "Home"
+      login: "Login"
+      sign_in: "Sign In"
+    buttons:
+      back: "Back"
+  users:
+    show:
+      show_page_of: "Show page of: "
+      friends_search: "Friends search"
+      new_friends_list: "New friends list"
+      forms:
+        submit: "Search"
+        clear: "Clear"
+      table:
+        thead:
+          tr:
+            td:
+              name: "Name"
+              country: "Country"
+              city: "City"
+              action: "Action"
+              group: "Group"
+              edit_group: "Edit group"
+              from: "From"
+        tbody:
+          invite: "Invite"
+          edit: "Edit"
+          delete: "Unfriend"
+          accept_invitation: "Accept invitation"
+          reject_invitation: "Reject invitation"
+      friends_list: "Friends list"
+      pending_invitations: "Pending invitations"
+      my_pending_invitations: "My pending invitations"
+    user_edit: "Edit"
+    password: "New Password"
+    password_confirmation: "Password Confirmation"
+    characters_minimum: "characters minimum"
+    current_password: "Old password" 
+    current_password_confirm: "we need your current password to confirm your changes"
+    save_changes: "Update"
+    cancel_my_account: "Cancel my account"
+    unhappy: "Unhappy"
+    moto_title: "We are just a big family of chefs!"
+    moto: "Nobody is perfect but if we can share our recipes with our friends and family, we can improve and we can try to save our traditions through generations."
+  invitations:
+    edit:
+      edit_group: "Edit group"
+    form:
+      select_group: "Select group"
+      save: "Save"
+  group:
+    family: "Family"
+    friends: "Friends"
+  recipes:
+    form:
+      select_friend: "Select Friend"
+      select_category: "Category"
+      clear: "Clear"
+      new_recipe: "New Recipe"
+      search: "Search"
+      placeholder: 
+        search: "Search"
+    edit:
+      edit_recipes: "Edit Recipes"
+      labels:
+        title: "Title"
+        category: "Category"
+        description: "Description"
+        image: "Image"
+    ingredients: "Ingredients"
+    add_ingredient: "Add Ingredient"
+    directions: "Directions"
+    add_step: "Add Step" 
+    just_me: "Just Me" 
+    family: "Family"
+    friends: "Friends" 
+    save: "Save"
+    ingredient_label: "Name"
+    remove_ingredient: "Delete"
+    drag_drop: "Drag and drop after update."
+    privacy: "Mod"
+    edit_recipe: "Edit"
+  category:
+    desert: "Desert"
+    main: "Main"
+    others: "Others"
+    salads: "Salads"
+    soup: "Soups"
+  footer:
+    family_recipes: "Family Recipes"
+    links: "Useful links"
+  home:
+    just_login: "Just Login or Sign In and you can start share your recipes with your family."
+
+
+
+
+
+
+
