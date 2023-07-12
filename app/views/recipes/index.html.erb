@@ -52,7 +52,7 @@
 	<hr>
 
 	<% if user_signed_in? %>
-		<%#= link_to "New Recipes", new_recipe_path, class: "btn btn-primary" %>
-		<%= button_tag t('recipes.form.new_recipe'), :name => nil, class:'btn btn-primary ' %>
+		<%= link_to t('recipes.form.new_recipe'), new_recipe_path, class: "btn btn-primary" %>
+		<%#= button_tag t('recipes.form.new_recipe'), :name => nil, class:'btn btn-primary ' %>
 	<% end %>
 </div>
