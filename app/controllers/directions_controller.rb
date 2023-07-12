@@ -1,8 +1,6 @@
 class DirectionsController < ApplicationController
 	before_action :find_direction, only: [:show, :edit, :update, :destroy]
   
-  
-
 
   def sort
   	params[:order].each do |key, value|
