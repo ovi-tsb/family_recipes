@@ -23,7 +23,7 @@
 						<%= label_tag t('recipes.edit.labels.title') %>
 						<%= f.input :title, label: false, input_html: { class: 'form-control' } %>
 					</div>
-					<div class="field col-md-5 col-3">
+					<div class="field col-md-5 col-4">
 						<span style='margin-left:13px;'><%= label_tag t('recipes.edit.labels.category') %></span><br>
 						<% category = Category.all.order(name: :asc).map{|f| [f.translated_name.capitalize]} %>
 						<%= select_tag :category_filter, options_for_select(category), {include_blank: t('recipes.form.select_category'),:id => 'standard-select', class: 'select'} %>

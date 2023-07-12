@@ -75,6 +75,8 @@ en:
         category: "Category"
         description: "Description"
         image: "Image"
+    recipes_list: "Recipes list"
+    new_recipe: "New Recipe"
     ingredients: "Ingredients"
     add_ingredient: "Add Ingredient"
     directions: "Directions"

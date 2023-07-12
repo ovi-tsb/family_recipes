@@ -75,6 +75,8 @@ ro:
         category: "Categorie"
         description: "Descriere"
         image: "Poza"
+    recipes_list: "Lista retete"
+    new_recipe: "Reteta noua"
     ingredients: "Ingrediente"
     add_ingredient: "Adauga Ingredient"
     directions: "Instructiuni"
