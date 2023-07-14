@@ -19,6 +19,7 @@
 //= require activestorage
 //= require cocoon
 //= require html.sortable
+//= require jquery.ui.touch-punch
 //= require turbolinks
 //= require_tree .
 

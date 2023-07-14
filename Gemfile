@@ -45,6 +45,7 @@ gem 'aws-sdk-s3', require: false
 gem 'rails-i18n'
 gem 'countries', '~> 5.5'
 
+gem 'pundit', '~> 2.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

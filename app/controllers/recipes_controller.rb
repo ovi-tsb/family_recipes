@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 	before_action :find_recipe, only: [:show, :edit, :update, :destroy]
-	# before_action :authenticate_user!
-	before_action :authenticate_user!, except: [:index, :show]
+	before_action :authenticate_user!
+	# before_action :authenticate_user!, except: [:index, :show]
 
 	def index
 		
@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
         	@recipe = Recipe.searchIngredients(params[:searchIngredients])
         elsif params[:category_filter].present? 
         	@recipe = Recipe.searchxx(params[:category_filter])
-        else    
+        else 
            	@recipe = Recipe.where(user_id: ids)
         end
 
@@ -31,7 +31,13 @@ class RecipesController < ApplicationController
 	end
 
 	def show
-
+		@recipe = Recipe.find(params[:id])
+		ids = current_user.friends.map{|f| f.id} << current_user.id 
+		unless @recipe.user_id == current_user.id || ids.include?(@recipe.user_id)
+		      flash[:notice] = "You don't have access to this information!"
+		      redirect_to recipes_path(session[:id])
+		      return
+		    end
 	end
 
 	def create
@@ -45,9 +51,15 @@ class RecipesController < ApplicationController
 	end
 
 	def edit
+		####### pundit ##########
+		authorize @recipe
+		####### pundit ##########
 	end
 
 	def update
+		####### pundit ##########
+		authorize @recipe
+		####### pundit ##########
 		if @recipe.update(recipe_params)
 	      redirect_to @recipe, notice: "Recipe was Succesfully updated !"
 	    else
