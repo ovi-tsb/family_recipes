@@ -1,9 +1,9 @@
 <div class="main_content">
 	<div class="row">
-		<div class="col-9">
+		<div class="col-7 col-sm-8 col-md-10">
 			<h1><%= t 'recipes.recipes_list' %></h1>
 		</div>
-		<div class="col-3 pull-right">
+		<div class="col-5 col-sm-4 col-md-2 pull-right">
 			<% if user_signed_in? %>
 				<%= link_to t('recipes.form.new_recipe'), new_recipe_path, class: "btn btn-primary" %>
 				<%#= button_tag t('recipes.form.new_recipe'), :name => nil, class:'btn btn-primary ' %>
