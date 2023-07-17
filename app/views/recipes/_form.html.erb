@@ -25,8 +25,9 @@
 					</div>
 					<div class="field col-md-5 col-4">
 						<span style='margin-left:13px;'><%= label_tag t('recipes.edit.labels.category') %></span><br>
-						<% category = Category.all.order(name: :asc).map{|f| [f.translated_name.capitalize]} %>
-						<%#= select_tag :category_id, options_for_select(category), {include_blank: t('recipes.form.select_category'),:id => 'standard-select', class: 'select'} %>
+						
+						<%# category = Category.all.order(name: :asc).map{|f| [f.translated_name.capitalize, f.id]} %>
+						<%#= select_tag :category_id, options_for_select(category), {include_blank: t('recipes.form.select_category'), class: "options_for_select" %>
 						<%= f.collection_select :category_id, Category.all.order(name: :asc), :id, :name, {prompt: "-Choose-" }, input_html: {class: "dropdown-toggle" }, style: 'text-transform: capitalize;' %>
 						<br>
 					</div>

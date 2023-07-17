@@ -1,5 +1,15 @@
 <div class="main_content">
-	<h1><%= t 'recipes.recipes_list' %></h1>
+	<div class="row">
+		<div class="col-9">
+			<h1><%= t 'recipes.recipes_list' %></h1>
+		</div>
+		<div class="col-3 pull-right">
+			<% if user_signed_in? %>
+				<%= link_to t('recipes.form.new_recipe'), new_recipe_path, class: "btn btn-primary" %>
+				<%#= button_tag t('recipes.form.new_recipe'), :name => nil, class:'btn btn-primary ' %>
+			<% end %>
+		</div>
+	</div>
 	<hr>
 	<%= form_tag recipes_path, :method => 'get' do %>
 
