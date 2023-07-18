@@ -15,7 +15,7 @@
 				<% if f.object.image.attached? %>
 				
 					<div class="field">
-						<%= image_tag f.object.image, class: "edit-form-image" if f.object.image.attached? %>
+						<%= image_tag f.object.image.variant(quality: "50"), class: "edit-form-image" if f.object.image.attached? %>
 					</div>
 				<% end %>
 				<div class="field col-sm-2 col-md-2 delete-button">
