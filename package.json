@@ -1,6 +1,9 @@
 {
   "name": "Family_recipes",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-dev-server": "^4.15.1"
+  }
 }
-

@@ -16,7 +16,7 @@ html, body {width: auto!important; overflow-x: hidden!important}
 }
 .direction-image{
 	/*float:right;*/
-  width: 100%;
+  /*width: 100%;*/
 
 }
 .image_wrapper img{
@@ -151,7 +151,6 @@ select {
   box-sizing: border-box;
   padding: 0.3em 2em 0.3em 0.3em;
   margin: 0px 10px;
-
   border: 1px solid #eee;
   font: inherit;
   line-height: inherit;
@@ -228,7 +227,6 @@ select:focus {
 
 textarea {
   height: 120px;
-
 }
 .form-button  {
   float: right;
