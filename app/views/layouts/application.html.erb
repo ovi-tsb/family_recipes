@@ -89,16 +89,18 @@
               <!-- <li><%#= link_to image_tag("Flag_of_Romania.svg.png"), root_path(locale: :ro), class: "flag" %></li> -->
             <%# end %>
           <!-- </ul> -->
-          <ul class="language">
+          <ul class="language row">
             <% I18n.available_locales.each do |locale| %>
+            
+                <li class="col-md-1">
+                  <% if I18n.locale == locale %>
+                    <%= t(locale, scope: 'locales') %>
+                  <% else %>
+                    <%= link_to t(locale, scope: 'locales'), url_for(locale: locale) %>
+                  <% end %>
+                </li>
               
-              <li>
-                <% if I18n.locale == locale %>
-                  <%= t(locale, scope: 'locales') %>
-                <% else %>
-                  <%= link_to t(locale, scope: 'locales'), url_for(locale: locale) %>
-                <% end %>
-              </li>
+              
             <% end %>
           </ul>
 

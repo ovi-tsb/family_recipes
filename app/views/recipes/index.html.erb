@@ -25,6 +25,8 @@
 			<div class="col-sm-6 col-md-2 col-lg-2  right-select">
 				<% category = Category.all.order(name: :asc).map{|f| [f.translated_name.capitalize]} %>
 				<%= select_tag :category_filter, options_for_select(category), {include_blank: t('recipes.form.select_category'),:id => 'standard-select', class: 'select'} %>
+
+				<%#= f.collection_select :category_id, Category.all.order(name: :asc), :id, :name, {prompt: "-Choose-" }, input_html: {class: "dropdown-toggle" }, style: 'text-transform: capitalize;' %>
 			</div>
 		<!-- </div> -->
 		<!-- <div class="row">	 -->

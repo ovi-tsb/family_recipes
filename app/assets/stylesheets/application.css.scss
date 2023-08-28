@@ -11,11 +11,14 @@
 }
 html, body {width: auto!important; overflow-x: hidden!important} 
 .directions img{
-	width: 200px;
+	max-width: 100%;
+
 	/*float: right*/
 }
 .direction-image{
 	/*float:right;*/
+  width: 100%;
+
 }
 .image_wrapper img{
 	/*max-width: 200px;*/

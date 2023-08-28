@@ -25,7 +25,7 @@ module FamilyRecipes
     # ...
 
     
-    config.i18n.available_locales = [:en, :ro]
+    config.i18n.available_locales = [:en, :ro, :es]
     config.i18n.default_locale = :en
 
 
